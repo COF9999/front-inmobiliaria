@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { BannerFilter } from "./modules/FilterComponent";
-import iconCloseGoToGreen from "../../images/icon-close-512.webp"
-import filterSearch from "../../images/filter-search.png"
 import "../css/publications.css"
 import { OverlayFilter } from "./modules/OverlayFilter";
 import { localStorageFunction } from "../js/methodsLocalStorage";

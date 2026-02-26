@@ -1,8 +1,7 @@
 import React, { useContext,useEffect,useState } from "react";
 import { Outlet, Navigate, Link } from "react-router-dom";
 import { AuthContext } from "./AuthProvider"; // Asegúrate de ajustar la ruta de importación
-import { LoginContext } from "./Auth/login";
-import logoCue from "../images/logo-cue.png"
+import { LoginContext } from "./inmobiliaria/Auth/login";
 import "./css/application.css"
 import "./css/resize.css"
 
@@ -19,7 +18,7 @@ function NavHeader({valueNavHeader}){
     const changeSelectValueOption = (key)=>{
         setSelectOptionNav(key)
     }
-
+ 
     return(
         <nav className={`nav-options-pages`}>
                     <Link to="/publications" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Publicaciones</Link>

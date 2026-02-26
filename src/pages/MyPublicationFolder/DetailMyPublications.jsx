@@ -2,8 +2,6 @@ import { useParams } from "react-router-dom"
 import { useState,useEffect,useRef } from "react"
 import "../css/myPublicationDetail.css"
 import axios from "axios"
-import imgBook from "../../images/img-book.jpeg"
-import iconCloseCommet from "../../images/icon-close-512.webp"
 import {baseUrl, baseUrlS3 } from "../../../hostConfig"
 
 
