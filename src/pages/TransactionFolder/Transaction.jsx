@@ -1,7 +1,6 @@
 import React,{useEffect,useRef,useState} from "react";
 import axios from "axios";
 import "../css/transaction.css"
-import iconCloseCommet from "../../images/icon-close-512.webp"
 import {baseUrl,baseUrlS3} from "../../../hostConfig";
 
 

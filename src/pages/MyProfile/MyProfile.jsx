@@ -3,7 +3,6 @@ import axios from "axios"
 import "../css/denunciation.css"
 import { localStorageFunction } from "../js/methodsLocalStorage"
 import {baseUrl} from "../../../hostConfig";
-import supportSvg from"../../images/support.svg"
 
 function Denunciations({userDenunciator,message}){
     return(

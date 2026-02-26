@@ -1,10 +1,9 @@
 import React, { useState, useContext, createContext, useRef,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthProvider';// Asegúrate de ajustar la ruta de importación
+import { AuthContext } from '../../AuthProvider';// Asegúrate de ajustar la ruta de importación
 import '../css/login.css'
-import imgLogoCue from "../../images/logo-cue.png"
-import {baseUrl} from "../../../hostConfig";
+import {baseUrl} from "../../../../hostConfig";
 
 export const LoginContext = createContext()
 
@@ -19,11 +18,11 @@ function BoxInformation({valueTitleCueThings}){
     <div className='box-information'>
         <div className='div-out-logo-cue'>
           <div className='div-logo-cue'>
-             <img src={imgLogoCue} alt="" />
+             <img  alt="" />
           </div>
         </div>
         <div className='div-welcome'>
-              <h2>CUE THINGS</h2>
+              <h2>MODIFICAR</h2>
         </div>
     </div>
   )
