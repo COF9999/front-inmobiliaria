@@ -1,0 +1,210 @@
+  
+  :root {
+    --wds-emerald-400: #03ffc0;
+    --wds-yellow-400: #ffbc38;
+    --wds-blue-400: #38a8ff;
+    --wds-purple-400: #c738ff;
+    --wds-pink-400: #ff387d;
+    --wds-orange-400: #ff7138;
+    --wds-red-400: #f02405;
+    --cht-green:rgba(3, 178, 47, 0.782);
+  }
+
+  
+  
+  .main-chat-socket{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 1000;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .section-chat-socket{
+    position: relative;
+    width: 100%;
+    display: flex;
+    column-gap: 25px;
+  }
+
+  .closeChat{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-weight: bolder;
+  }
+  
+  
+  .panel-chat-socket{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 50%;
+    row-gap: 20px;
+    margin: auto;
+    width: 600px;
+  }
+  
+  .chat-chat-socket{
+    height: 80vh;
+    background-color: #787777;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 0;
+    overflow-y: auto;
+  }
+  
+  .box-send-message-chat-socket{
+    display: flex;
+    column-gap: 5px;
+    
+  }
+  
+  .box-send-message-chat-socket input{
+    width: 90%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  
+  .box-send-message-chat-socket button{
+    flex: 1;
+    padding: 10px;
+    color: white;
+    background-color: rgba(0, 255, 64, 0.782);
+    letter-spacing: 2px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+
+
+/* Estilo para la barra de desplazamiento */
+.scrollable::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra vertical */
+    height: 8px; /* Alto de la barra horizontal */
+}
+
+/* Fondo de la barra */
+.scrollable::-webkit-scrollbar-track {
+    background: #e1e1e1; 
+    border-radius: 8px;
+}
+
+/* Barra de desplazamiento */
+.scrollable::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #040799, #1604b1);
+    border-radius: 8px;
+}
+
+/* Barra de desplazamiento al pasar el cursor */
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #040799, #1604b1);
+}
+  
+  /* ------------------ CardMessage */
+  
+  
+  .wrapper-message-chat-socket{
+    position: relative;
+    margin-top: 10px;
+    min-height: 70px;
+    width: 100%;
+  }
+  
+  .message-chat-socket{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    /* background-color: rgba(0, 255, 64, 0.782); */
+    background-color: #fff;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: max-content;
+  }
+  
+  .message-chat-socket p{
+    margin: 0;
+  }
+  
+  
+  /* Utils Styles */
+  .emerald-400{
+    color: var(--wds-emerald-400);
+  }
+  
+  .yellow-400{
+    color: var(--wds-yellow-400);
+  }
+  
+  .green-cht-basic{
+    background-color: var(--cht-green);
+  }
+
+  .blue-400{
+    color: var(--wds-blue-400);
+  }
+
+  .purple-400{
+    color: var(--wds-purple-400);
+  }
+
+  .pink-400{
+    color: var(--wds-pink-400);
+  }
+
+  .orange-400{
+    color: var(--wds-orange-400);
+  }
+
+  .red-400{
+    color: var(--wds-red-400);
+  }
+
+
+  
+  .margin-right{
+    left: auto;
+    right: 20px;
+  }
+  
+  /* -------- Media Querys */
+  
+  @media (max-width: 1100px){
+    .section-chat-socket{
+      width: 100%;
+    }
+  
+    .panel-chat-sockets{
+      width: 700px;
+    }
+  }
+  
+  @media (max-width:650px){
+    .main-chat-socket{
+      height: 95vh;
+    }
+
+    .closeChat{
+      top: -20px;
+    }
+
+    .section-chat-socket{
+      padding: 0;
+    }
+  }

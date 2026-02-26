@@ -1,0 +1,142 @@
+:root{
+    --color: rgb(12, 12, 162);
+}
+
+   
+
+.container-login{
+    min-height: 100vh;
+    display: flex;
+}
+
+.box-information{
+ width: 60%;
+ background-color: var(--color);
+ font-family:Arial, Helvetica, sans-serif;
+ position: relative;
+ height: 100vh;
+}
+
+.div-out-logo-cue{
+   
+}
+
+.box-information .div-logo-cue{
+    padding-top: 10px;
+    padding-left: 10px;
+    display: block;
+}
+
+.div-welcome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: max-content;
+    height: max-content;
+}
+
+
+.div-welcome{
+    font-size: 3em;
+}
+
+.div-welcome h2{
+    color: #f0f0f0;
+}
+
+
+.box-information .div-logo-cue img{
+    width: 100px;
+    height: 100px;
+}
+
+.box-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-family:tahoma, Verdana, Tahoma, sans-serif;
+    background: linear-gradient(to bottom, #f2f0f0, #f0f0f0)
+}
+
+.login-form{
+    background-color: snow;
+    border-radius: 10px;
+    width: 350px;
+    height: max-content;
+    max-height: 500px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px 0px #77777778  ;
+}
+
+.login-form div{
+    padding: 10px;
+}
+
+
+.login-form div label{
+  height: 20px;
+}
+
+.login-form div input{
+    height: 25px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 20px;
+    background-color: rgb(234, 229, 223);
+    font-size: 1em;
+    border-bottom: 1px solid #777;
+}
+
+.login-form div > *{
+    display: block;
+    width: 100%;
+}
+
+
+.div-btn-submit-login{
+    display: flex;
+    justify-content: center;
+}
+
+.div-btn-submit-login button{
+    width: 60%;
+    background-color: rgba(241, 13, 5, 0.837);
+    height: 40px;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+    font-size: 1em;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    padding: 8px;
+    transition-property: color,cursor,box-shadow;
+    transition-duration: .3s;
+    transition-delay: .2s;
+    transition-timing-function: ease-out;
+}
+
+.div-btn-submit-login button:hover{
+    cursor: pointer;
+    box-shadow: 0 1px 5px 0  rgba(241, 13, 5, 0.837);
+}
+
+
+
+@media (max-width: 1000px){
+    .box-information{
+        width: 50%;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 1000px){
+    .box-information{
+        font-size: 0.7em;
+    }
+}

@@ -1,0 +1,54 @@
+.container-principal-my-profile{
+    min-height: 95vh;
+    display: flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    flex-direction: column;
+}
+
+.div-image-my-profile{
+    /* background-color: bisque; */
+    padding-top: 5vh;
+    text-align: center;
+}
+
+.div-image-my-profile img{
+    width: 300px;
+}
+
+.div-points{
+    padding-top: 5vh;
+    text-align: center;
+    /* background-color: brown; */
+}
+
+.div-denunciations{
+    padding-top: 5vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.card-denunciations{
+    width: 50%;
+    background-color: rgba(226, 14, 3, 0.736);
+    border-radius: 10px;
+    padding: 10px;
+    transition: .3s ease;
+}
+
+.div-support-publication{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.div-support-publication:hover{
+    filter: drop-shadow(2px 2px 2px #8d8d8d);
+    transform: translateY(-1px);
+}
+
+.card-denunciations:hover{
+    transform: translateY(-3px);
+}

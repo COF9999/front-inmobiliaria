@@ -1,0 +1,110 @@
+:root{
+    /* --header: rgb(9, 23, 228); */
+    --header:  rgb(30, 30, 227)
+   
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-application{
+    min-height: 100vh;
+    background-color: #fff; 
+    display: flex;
+    flex-direction: column;
+}
+
+.container-nav-application{
+    /* background-color: aqua; */
+    background-color: var(--header);
+    height: 5vh;
+    border-radius: 0px 2px 0px 2px;
+    display: flex;
+    justify-content: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+}
+
+.div-nav-application-cue {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 5%;
+}
+
+.nav-options-pages a{
+   color: white;
+   font-family: sans-serif;
+   font-size: .88em;
+   text-transform: uppercase;
+   font-weight: bold;
+}
+
+.sweet-grey{
+    background-color: rgba(0, 22, 162, 0.973);
+    height: 100%;
+    border-radius: 5px;
+}
+
+.div-nav-auth{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    flex: 1;
+}
+
+.div-nav-profile{
+    width: 60%;
+    text-align: right;
+}
+
+.div-link-redirection{
+    font-weight: bold;
+}
+
+.div-nav-profile a{
+    font-weight: bold;
+}
+
+.div-close-session{
+    text-align: right;
+    flex: 1;
+    padding-right: 30px;
+}
+.div-nav-auth a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.div-nav-application-cue {
+    padding: 5px;
+}
+
+.div-nav-application-cue img{
+    width: 35px;
+    height: 35px;
+
+}
+
+.container-nav-application nav{
+    /* background-color: brown; */
+   
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.container-nav-application nav a{
+    text-decoration: none;
+    /* color: aliceblue; */
+  
+}

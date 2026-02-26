@@ -1,0 +1,471 @@
+.container-detail-publication{
+    background-color: rgb(202, 202, 217);
+    font-family:Tahoma, sans-serif;
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.container-img-offer{
+    display: flex;
+    background-color:rgb(250, 249, 248);
+    min-height: 50vh;
+}
+.content-render-img-detail{
+    background-color: rgb(228, 230, 228);
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-image-detail {
+    text-align: center;
+}
+
+.box-name-product-detail{
+    text-align: center;
+    padding: 10px;
+    color: #000;
+    font-weight: bolder;
+}
+.box-image-detail{
+    padding: 10px;
+    flex: 1;
+}
+.box-image-detail img{
+    height: 350px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.content-render-offer-detail{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    padding: 20px;
+    row-gap: 15px;
+}
+
+.content-render-offer-detail .box-offer{
+    background-color: rgb(24, 96, 251);
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+
+.content-render-offer-detail .box-offer:hover{
+    outline: 1px solid rgb(24, 96, 251);
+    outline-offset: 5px;
+}
+
+.content-render-offer-detail .box-offer div{
+   text-align: center;
+   width: 100%;
+   padding: 10px;
+}
+
+.box-offer input{
+    height: 3vh;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #333;
+    border-radius: 5px;
+}
+
+.box-offer h3{
+    color: #f5f5f5;
+}
+.container-all-info-detail div{
+    text-align: center;
+    padding: 10px;
+    
+}
+
+.div-btn-offer{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.div-btn-offer button{
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    width: 20%;
+    border-radius: 10px;
+    background-color:  rgb(24, 96, 251);
+    color: #f5f5f5;
+    font-size: 1em;
+    letter-spacing: 2px;
+    transition-property: box-shadow,outline, outline-offset;
+    transition-duration: .4s;
+    transition-timing-function: ease-out;
+    transition-delay: .2s;
+    box-sizing: content-box;
+}
+
+.div-btn-offer button:hover{
+    box-shadow: 0 2px 5px 0 rgb(24, 96, 251);
+    outline: 1px solid #f5f5f5;
+    outline-offset: 2px;
+}
+
+
+.container-information-detail{
+    min-height: 45vh;
+    display: flex;
+}
+
+.container-description{
+    width: 60%;
+}
+
+.description-basic{
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+.description-basic div{
+    padding-top: 10px;
+}
+
+.description-basic div p{
+    line-height: 1.5em;
+}
+
+.description-basic .p-description{
+    text-align: justify;
+    width: 250px;
+    margin: auto;
+}
+
+.container-actions-detail-publication{
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 50px;
+    height: 30vh;
+    column-gap: 20px;
+}
+
+
+.div-m-learning{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.div-match-score{
+    flex: 1;
+    position: relative;
+}
+
+.div-match-score p{
+   height: max-content; 
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   top: 0; 
+   margin: auto;
+   text-align: center;
+   font-size: 1.4em;
+}
+
+
+
+.--content-div-icon{
+    width: 150px;
+    height: 150px;
+}
+
+.--content-div-icon img{
+    width: 150px;
+}
+
+ .inner-div-icon-machine-l {
+    height: max-content;
+    text-align: center;
+ }
+
+.inner-div-icon-machine-l img{
+    width: 70px;
+} 
+
+.--content-div-icon{
+    cursor: pointer;
+    transition: transform, .3s,ease-out .2s;
+}
+
+.--content-div-icon:hover{
+    transform: translateY(-2px);
+}
+
+
+.inner-div-icon{
+    text-align: center;
+    width: max-content;
+}
+
+
+.father-content-chapt{
+    width: 100%;
+    background-color: #efeae2;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    z-index: 200;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.father-content-chapt .div-close-icon{
+    position: absolute;
+    top:5px;
+    right: 5px;
+}
+
+
+.father-content-chapt .div-close-icon img{
+    width: 20px;
+}
+
+.father-content-chapt{
+    background-color: rgb(255, 255, 255);
+    
+}
+
+
+.container-chapt{
+    background-color: #efeae2;
+    padding-top: 10px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+.first-content-chapt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    padding: 15px 0 10px 0;
+    background-color: #f0f2f5;
+}
+
+
+.all-chapts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+    row-gap: 10px;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.cardDetailChapt{
+    border-radius: 5px;
+    padding: 10px;
+    width: 350px;
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.cardDetailChapt.myComment{
+    background-color: #70ed76;
+}
+
+.cardDetailChapt.friendComment{
+    background-color: #fff;
+}
+
+.wrapper-chapt{
+    width: 100%;
+}
+
+
+.data-content-input{
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    width: inherit;
+    min-width: 0;
+    min-height: 0px;
+    padding: 9px 12px;
+    margin: 5px 8px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 20px;
+    border-radius: 8px;
+    outline: none;
+    will-change: width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: none;
+}
+
+.chat-tab-1{
+    width: 100%;
+    display: flex;
+}
+
+.chat-tab-1 .campus-text{
+    max-height: 11.76em;
+    height: max-content;
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+}
+
+
+.div-btn-send-chap{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+}
+
+.div-btn-send-chap div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-send-message-chap{
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.overlay{
+    width: 100%;
+    background-color: rgba(176, 173, 173, 0.581);
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 100;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* ---------------------------Reportar */
+
+.div-content-card-report{
+    background-color: rgb(0, 72, 255);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    position: relative;
+}
+
+.div-content-card-report div{
+    text-align: center;
+}
+
+.div-content-card-report textarea{
+    resize: none;
+    padding: 10px;
+    outline: none;
+    border: snow;
+    background-color: rgb(231, 231, 225);
+    border-radius: 5px;
+    width: 100%;
+    height: 200px;
+}
+
+.div-content-card-report button{
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.div-content-card-report button:hover{
+    padding: 10px;
+}
+
+.div-close-popUp-report{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+.div-close-popUp-report img{
+ width: 18px;
+ cursor: pointer;
+}
+
+@media (max-width: 980px) {
+   
+    .container-information-detail{
+        flex-direction: column;
+    }
+    
+
+    .container-description{
+        width: 100%;
+    }
+
+    .description-basic{
+        margin: auto;
+    }
+
+    .list-actions-detail{
+        margin: auto;
+    }
+
+    .container-actions-detail-publication{
+        justify-content: center;
+    }
+    
+}
+
+@media (max-width: 860px) {
+    .container-img-offer{
+        flex-direction: column;
+    }
+
+    .content-render-img-detail{
+        width: 100%;
+    }
+
+    .--content-div-icon img{
+        width: 60px;
+    }
+
+    .div-btn-offer button{
+        width: 200px;
+    }
+}

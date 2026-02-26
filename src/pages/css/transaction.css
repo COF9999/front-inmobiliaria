@@ -1,0 +1,161 @@
+.container-primary-transaction{
+    background-color:#fff;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 95vh;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+
+
+
+
+.container-principal-list-transaction{
+    width: 100%;
+}
+
+.container-list-transaction{
+    padding: 10px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    overflow-y: auto;
+    column-gap: 10px;
+    row-gap: 30px;
+    justify-content: space-around;
+}
+
+
+
+.box-card-transaction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(24, 96, 251);
+    max-width: 300px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #777;
+    height: max-content;
+}
+
+.box-card-transaction div{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-icon-show-valorations{
+    font-size: 1.4em;
+    width: 100%;
+}
+.status-my-transaction{
+    text-align: center;
+    font-weight: bold;
+}
+
+.green-publication{
+    color: rgb(11, 209, 4);
+}
+
+.blue-publication{
+    color: blue;
+}
+
+.box-inner{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.box-inner img{
+    width: 250px;
+    height: 250px;
+}
+
+.comment{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(12, 38, 204);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.overlay-valoration{
+    width: 100%;
+    background-color: rgba(176, 173, 173, 0.581);
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 200;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.div-content-commet{
+    background-color: rgb(30, 30, 227);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.div-close-popUp-comment{
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    width: max-content;
+}
+
+.div-content-commet .normal-div{
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+.div-content-commet textarea{
+    resize: none;
+    padding: 10px;
+
+}
+
+.div-content-commet button{
+    width: 40%;
+    padding: 10px;
+
+}
+
+
+
+.div-content-commet input{
+    padding: 10px;
+    width: 100%;
+}
+
+
+
+.div-close-popUp-comment div img{
+    width: 20px;
+}
+
+@media (max-width: 1200px) {
+    .container-list-transaction{
+        grid-template-columns: auto auto;
+        row-gap: 75px;
+    }
+}
+
+@media (max-width: 640px) {
+    .container-list-transaction{
+        grid-template-columns: auto;
+    }
+}

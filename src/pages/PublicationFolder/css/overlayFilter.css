@@ -1,0 +1,24 @@
+.overlay-full-width{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    z-index: 100;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.div-part-1{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-banner{
+    width: 100%;
+    background-color: red;
+}

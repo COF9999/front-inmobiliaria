@@ -1,0 +1,65 @@
+:root{
+    --color: rgb(12, 12, 162);
+}
+
+
+.container-register{
+    min-height: 100vh;
+    display: flex;
+}
+
+
+.box-register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-family:tahoma, Verdana, Tahoma, sans-serif;
+    background: linear-gradient(to bottom, #f2f0f0, #f0f0f0)
+}
+
+.register-form{
+    background-color: snow;
+    border-radius: 5px;
+    width: 350px;
+    height: max-content;
+    max-height: 500px;
+    padding: 20px;
+}
+
+.register-form div{
+    padding: 10px;
+}
+
+
+.register-form div label{
+  height: 20px;
+}
+
+.register-form div input{
+    height: 30px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    background-color: rgb(234, 229, 223);
+    padding: 10px;
+}
+
+.register-form div > *{
+    display: block;
+    width: 100%;
+}
+
+
+.div-btn-submit-register{
+    display: flex;
+    justify-content: center;
+}
+
+.div-btn-submit-register button{
+    width: 50%;
+    background-color: rgb(5, 241, 68);
+    height: 30px;
+    border: none;
+    outline: none;
+}
