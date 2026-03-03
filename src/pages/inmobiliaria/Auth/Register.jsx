@@ -58,10 +58,10 @@ export const Register = () => {
     <div className='box-register'>
     <form onSubmit={handleSubmit} className='register-form'>
       <div>
-        <h2>Login</h2>
+        <h2>Registro</h2>
       </div>
       <div>
-        <label htmlFor="name">Nombre</label>
+        <label htmlFor="name">Nombre:</label>
         <input
           type="text"
           required
@@ -69,7 +69,7 @@ export const Register = () => {
         />
       </div>
       <div>
-        <label htmlFor="username">Nombre usuario</label>
+        <label htmlFor="username">Nombre usuario:</label>
         <input
           type="text"
           required
@@ -77,7 +77,7 @@ export const Register = () => {
         />
       </div>
       <div>
-        <label htmlFor="email">Correo</label>
+        <label htmlFor="email">Correo:</label>
         <input
           type="text"
           required
@@ -85,7 +85,7 @@ export const Register = () => {
         />
       </div>
       <div>
-        <label htmlFor="identification">Identidicación</label>
+        <label htmlFor="identification">Identificación:</label>
         <input
           type="text"
           required
@@ -100,8 +100,9 @@ export const Register = () => {
           ref={passwordUser}
         />
       </div>
-      <div className='div-btn-submit-register'>
+      <div className='div-buttons'>
         <button type="submit">Registrar</button>
+        <button type="button" onClick={() => navigate('/')}>Iniciar sesión</button>
       </div>
     </form>
     </div>

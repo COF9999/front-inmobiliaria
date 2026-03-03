@@ -22,7 +22,7 @@ function BoxInformation({valueTitleCueThings}){
           </div>
         </div>
         <div className='div-welcome'>
-              <h2>MODIFICAR</h2>
+              <h2>Habitar inmobiliaria</h2>
         </div>
     </div>
   )

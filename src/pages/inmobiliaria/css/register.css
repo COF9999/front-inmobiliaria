@@ -1,11 +1,12 @@
-:root{
+/* :root{
     --color: rgb(12, 12, 162);
-}
+} */
 
 
 .container-register{
     min-height: 100vh;
     display: flex;
+    --color: #4570B4;
 }
 
 
@@ -15,7 +16,7 @@
     justify-content: center;
     flex: 1;
     font-family:tahoma, Verdana, Tahoma, sans-serif;
-    background: linear-gradient(to bottom, #f2f0f0, #f0f0f0)
+    background-color: var(--color);
 }
 
 .register-form{
@@ -31,6 +32,10 @@
     padding: 10px;
 }
 
+.register-form h2 {
+  text-align: center;  /* centra el texto horizontalmente */
+  margin-bottom: 20px; /* opcional: separa del resto del formulario */
+}
 
 .register-form div label{
   height: 20px;
@@ -51,15 +56,25 @@
 }
 
 
-.div-btn-submit-register{
+.div-buttons{
     display: flex;
     justify-content: center;
+    gap: 15px; /* espacio entre botones */
 }
 
-.div-btn-submit-register button{
+.div-buttons button{
     width: 50%;
-    background-color: rgb(5, 241, 68);
     height: 30px;
     border: none;
     outline: none;
+}
+
+.div-buttons button:first-child{
+    background-color: rgb(5, 241, 68);
+}
+
+.div-buttons button:last-child{
+    background-color: #2f5597;
+    color: white;
+    
 }
