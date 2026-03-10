@@ -5,6 +5,8 @@ import { LoginContext } from "./inmobiliaria/Auth/login";
 import "./css/application.css"
 import "./css/resize.css"
 
+import logoHabitar from "../assets/habitarr.png"
+
 
 function NavHeader({valueNavHeader}){
 
@@ -131,21 +133,20 @@ export function ProtectedRoute(){
         ? <div className="container-application">
             <div className="container-nav-application">
                 <div className="div-nav-application-cue">
-                    <img src={logoCue} alt="cue-img" />
+                    <img src={logoHabitar} alt="cue-img" />
                 </div>
                 <IconMenuResize
                     valueMenuOpen={menuOpen}
                     toggleMenu={setMenuOpen}
                     navHeaderBody={navHeaderBody}
                     setNavHeaderBody={setNavHeaderBody}
-                >
+                />
 
-                </IconMenuResize>
-                <NavHeader
+                {/* <NavHeader
                     valueNavHeader={navHeader}
                 >
+                </NavHeader> */}
 
-                </NavHeader>
                 <div className="div-nav-auth">
                     <div className="div-nav-profile">
                         <Link to={"/my-profile"}>@{username}</Link>
@@ -155,12 +156,17 @@ export function ProtectedRoute(){
                     </div>
                 </div>
             </div>
+
+            {/* SIDEBAR */}
+            <NavHeader valueNavHeader={navHeader} />
+
+            <NavHeaderBody
+                setNavHeaderBody={setNavHeaderBody}
+                navHeaderBody={navHeaderBody}
+            />
+
             <div className="father-div-content-aplication">
-                <NavHeaderBody
-                    setNavHeaderBody={setNavHeaderBody}
-                    navHeaderBody={navHeaderBody}
-                ></NavHeaderBody>
-                <Outlet></Outlet>
+                <Outlet />
             </div>
     </div>
     : <Navigate to="/"></Navigate>

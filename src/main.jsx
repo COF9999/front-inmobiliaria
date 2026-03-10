@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './app.css'
 import { Login } from './pages/inmobiliaria/Auth/login.jsx';
 import { Register } from './pages/inmobiliaria/Auth/Register.jsx';
+import { Home } from './pages/inmobiliaria/pagesInmobiliaria/Home.jsx';
 import { ContainerPublication } from './pages/PublicationFolder/RootPublication.jsx';
 import { Publication } from './pages/PublicationFolder/Publication.jsx';
 import { Detail } from './pages/PublicationFolder/DetailPublication.jsx';
@@ -16,31 +17,29 @@ const router = createBrowserRouter([
     path: '/',
     element: <Login />
   },
+
   {
     path: '/register',
     element:<Register></Register>
   },
+
   {
     path: '/',
     element: <ProtectedRoute />,
     children: [
       {
-        path: '/publications',
+        path: '/home',
         element: <ContainerPublication />,
         children:[
-          {
-            index:true,
-            element: <Publication></Publication>
-          },
-          {
-            path: 'detail/:id',
-            element: <Detail></Detail>
-          }
+          // {index:true, element: <Publication />},
+          {index:true, element: <Home />},
+          // {path: 'detail/:id', element: <Detail />}
         ]
-      },  
+      }, 
+
       {
         path: '/transacciones',
-        element: <Transaction></Transaction>
+        element: <Transaction/>
       }
     ]
   }

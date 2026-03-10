@@ -4,6 +4,7 @@
     min-height: max-content;
     width: 100%;
     position: relative;
+    /* background-color: red; */
 }
 
 .container-filter-publications{
@@ -25,9 +26,9 @@
     color: #f5f5f5;
 }
 
-.box-filter-category{
+/* .box-filter-category{
     
-}
+} */
 .div-father-list-filters-category{
     padding: 10px;
     display: flex;

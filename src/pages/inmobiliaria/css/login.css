@@ -1,12 +1,12 @@
-:root{
+/* :root{
     --color: rgb(12, 12, 162);
-}
-
-   
-
+} */
+ 
 .container-login{
     min-height: 100vh;
     display: flex;
+    --color: #4570B4;
+
 }
 
 .box-information{
@@ -17,9 +17,9 @@
  height: 100vh;
 }
 
-.div-out-logo-cue{
+/* .div-out-logo-cue{
    
-}
+} */
 
 .box-information .div-logo-cue{
     padding-top: 10px;
