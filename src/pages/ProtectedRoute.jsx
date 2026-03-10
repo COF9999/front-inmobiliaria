@@ -8,7 +8,7 @@ import "./css/resize.css"
 import logoHabitar from "../assets/habitarr.png"
 
 
-function NavHeader({valueNavHeader}){
+function NormalSideBar({valueNavHeader}){
 
     const [selectOptionNav,setSelectOptionNav] = useState()
     const styleSelectOption = "sweet-grey"
@@ -23,12 +23,8 @@ function NavHeader({valueNavHeader}){
  
     return(
         <nav className={`nav-options-pages`}>
-                    <Link to="/publications" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Publicaciones</Link>
-                    <Link to="/my-publications" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Mis publicaciones</Link>
-                    <Link to={"/offer"} className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Mis Ofertas</Link>
-                    <Link to="/my-products" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Mis productos</Link>
-                    <Link to={"/transacciones"} className={selectOptionNav===5?styleSelectOption:""} onClick={()=> changeSelectValueOption(5)}>Transacciones</Link>
-                    <Link to="/green-page" target="_blank" rel="noopener" className={selectOptionNav===6?styleSelectOption:""} onClick={()=> changeSelectValueOption(6)}>Economia circular</Link>
+                       <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
+                   
          </nav>
     )
 }
@@ -55,7 +51,7 @@ function IconMenuResize({valueMenuOpen,toggleMenu,setNavHeaderBody,navHeaderBody
 }
 
 
-function NavHeaderBody ({navHeaderBody,setNavHeaderBody}){
+function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
 
     if(navHeaderBody===false){
         return
@@ -65,30 +61,13 @@ function NavHeaderBody ({navHeaderBody,setNavHeaderBody}){
         setNavHeaderBody(false)
     }
 
-
     return(
              <div
                     className="div-menu-resize"
                 >
                     <div className="div-link-redirection">
-                      <Link to="/publications" onClick={deactiveNavHeaderBody}>Publicaciones</Link>
+                      <Link to="/home" onClick={deactiveNavHeaderBody}>Home</Link>
                     </div>
-                    <div className="div-link-redirection">
-                        <Link to="/my-publications" onClick={deactiveNavHeaderBody}>Mis publicaciones</Link>
-                    </div>
-                    <div className="div-link-redirection">
-                        <Link to={"/offer"} onClick={deactiveNavHeaderBody}>Mis Ofertas</Link>
-                    </div>
-                    <div className="div-link-redirection">
-                         <Link to="/my-products" onClick={deactiveNavHeaderBody}>Mis productos</Link>
-                    </div>
-                    <div className="div-link-redirection">
-                         <Link to={"/transacciones"} onClick={deactiveNavHeaderBody}>Transacciones</Link>
-                    </div>
-                   
-                   <div className="div-link-redirection">
-                         <Link to="/green-page" onClick={deactiveNavHeaderBody}>Economia circular</Link>
-                   </div>    
                 </div>
     )
 }
@@ -158,9 +137,9 @@ export function ProtectedRoute(){
             </div>
 
             {/* SIDEBAR */}
-            <NavHeader valueNavHeader={navHeader} />
+            <NormalSideBar valueNavHeader={navHeader} />
 
-            <NavHeaderBody
+            <HamburguerSideBar
                 setNavHeaderBody={setNavHeaderBody}
                 navHeaderBody={navHeaderBody}
             />
