@@ -13,38 +13,77 @@
 
 .container-application{
     min-height: 100vh;
-    background-color: #fff; 
+    background-color: white;
     display: flex;
     flex-direction: column;
 }
 
 .container-nav-application{
-    /* background-color: aqua; */
-    background-color: var(--header);
-    height: 5vh;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    height: 60px;
     border-radius: 0px 2px 0px 2px;
     display: flex;
-    justify-content: center;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    align-items: center; 
+    justify-content:space-between;
     position: sticky;
     top: 0;
-    z-index: 101;
+    /* z-index: 200; */
+    border-bottom: 2px solid rgb(202, 210, 42); 
+    background-color:#fff;
+   
+
 }
+
 
 .div-nav-application-cue {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
-    width: 5%;
+    width: 15%;
+    padding: 5px;
+}
+
+.div-nav-application-cue img{
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    background-color: transparent;
+
+}
+.nav-options-pages{
+    /* z-index:100; */
+    width:220px; 
+    background:rgb(51, 112, 180);
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    left:0;
+    top:60px;
+    height:calc(100vh - 60px);
+    
+
 }
 
 .nav-options-pages a{
-   color: white;
-   font-family: sans-serif;
-   font-size: .88em;
-   text-transform: uppercase;
-   font-weight: bold;
+    color:white;
+    padding:15px 20px;
+    /* text-decoration:none; */
+    font-family: sans-serif;
+    font-size: .88em;
+    text-transform: uppercase;
+    font-weight: bold;
 }
+
+.nav-options-pages a:hover{
+    background:#555;
+}
+
+.father-div-content-aplication{
+    margin-left:220px;
+}
+
+
+
 
 .sweet-grey{
     background-color: rgba(0, 22, 162, 0.973);
@@ -57,11 +96,13 @@
     align-items: center;
     margin-right: 5px;
     flex: 1;
+    
 }
 
 .div-nav-profile{
     width: 60%;
     text-align: right;
+    
 }
 
 .div-link-redirection{
@@ -79,32 +120,41 @@
 }
 .div-nav-auth a{
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: bold;
 }
 
-.div-nav-application-cue {
-    padding: 5px;
-}
 
-.div-nav-application-cue img{
-    width: 35px;
-    height: 35px;
 
-}
 
-.container-nav-application nav{
-    /* background-color: brown; */
-   
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-}
 
 .container-nav-application nav a{
     text-decoration: none;
     /* color: aliceblue; */
   
 }
+/*responsive*/
+
+@media (max-width:1000px){
+
+    .nav-options-pages{
+        display: none;
+    }
+
+    .father-div-content-aplication{
+        margin-left:0;
+    }
+
+    .div-nav-application-cue {
+        width: 20%;          /* más espacio para el logo en móvil */
+        justify-content: center; /* centrado si quieres */
+        padding: 2px;
+    }
+
+
+    .div-nav-application-cue img {
+        width: 70px;         /* reduce tamaño para que quepa */
+        height: 45px;
+    }
+}
+

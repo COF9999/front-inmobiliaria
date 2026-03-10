@@ -7,9 +7,6 @@ import {baseUrl} from "../../../../hostConfig";
 
 export const LoginContext = createContext()
 
-
-
-
 function BoxInformation({valueTitleCueThings}){
   if(valueTitleCueThings===false){
     return
@@ -58,29 +55,41 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Envía los datos del formulario al servidor para iniciar sesión
-      const response = await axios.post(`${baseUrl}/user/auth`, {
-        "identification":username,
-        password,
-      });
+    // Simulación de respuesta del backend------------------------------------------------------------------------
+    const fakeToken = "fake-jwt-token-123";
 
-      // Si el inicio de sesión es exitoso, guarda el token JWT y establece isAuth en true
-      if (response.status === 200 && response.data.authenticationResponseDTO.token) {
-        const nameUsername = response.data.users.username
-        usernameContext(nameUsername)
-        localStorage.setItem("username",nameUsername)
-        login(response.data.authenticationResponseDTO.token); // Guarda el token JWT en el contexto de autenticación
-        navigate('publications'); // Redirige al usuario a la página de publicaciones
-      } else {
-        // Si hay un error en el servidor, muestra un mensaje de error
-        alert('Error al iniciar sesión');
-      }
-    } catch (error) {
-      // Si hay un error de red o cualquier otro error, muestra un mensaje de error
-      alert('Error al inicar sesion'+error);
-      console.error(error);
-    }
+    login(fakeToken); // Simula autenticación
+    localStorage.setItem("token", fakeToken);
+
+    navigate('/home');
+
+    // hasta aqui la simulacion del backend----------------------------------------------------------------------------------
+    
+    // se comento esta linea para pasar el login-----------------------------------------------------------------------------
+    // try {
+    //   // Envía los datos del formulario al servidor para iniciar sesión
+    //   const response = await axios.post(`${baseUrl}/user/auth`, {
+    //     "identification":username,
+    //     password,
+    //   });
+
+    //   // Si el inicio de sesión es exitoso, guarda el token JWT y establece isAuth en true
+    //   if (response.status === 200 && response.data.authenticationResponseDTO.token) {
+    //     const nameUsername = response.data.users.username
+    //     usernameContext(nameUsername)
+    //     localStorage.setItem("username",nameUsername)
+    //     login(response.data.authenticationResponseDTO.token); // Guarda el token JWT en el contexto de autenticación
+    //     navigate('publications'); // Redirige al usuario a la página de publicaciones
+    //   } else {
+    //     // Si hay un error en el servidor, muestra un mensaje de error
+    //     alert('Error al iniciar sesión');
+    //   }
+    // } catch (error) {
+    //   // Si hay un error de red o cualquier otro error, muestra un mensaje de error
+    //   alert('Error al inicar sesion'+error);
+    //   console.error(error);
+    // }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   };
 
   return (

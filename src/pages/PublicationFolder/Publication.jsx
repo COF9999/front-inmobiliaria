@@ -77,7 +77,7 @@ function Overlay({statePopUpGreen,popUpSetStatus}){
                    </div>
                    <div className="div-close-popUp-green-page">
                         <div>
-                            <img src={iconCloseGoToGreen} alt="" onClick={changeActiveOverlay}/>
+                            {/* <img src={iconCloseGoToGreen} alt="" onClick={changeActiveOverlay}/> */}
                         </div>
                    </div>
                 </div>
@@ -96,7 +96,8 @@ function IconFilterResize({partFilter,setActiveOverlayFilter,activeOverlayFilter
 
     return(
         <div className="div-filter-resize-icon-search" onClick={e => setActiveOverlayFilter(!activeOverlayFilter)}>
-         <img src={filterSearch} alt="" />
+         {/* <img src={filterSearch} alt="" /> */}
+         <button>Filtrar</button>
         </div>
     )
 }
@@ -131,22 +132,57 @@ export function Publication(){
 
 
 
-    useEffect(()=>{
-        const fetchProducts = async () =>{
-                try{
-                    const response = await axios.get(`${baseUrl}/publication/allPublications`)
-                    if(response.status === 200){
-                        setAllPublications(response.data)
-                    }else{
-                        console.log("BAD RETURN OFF SERVER");
-                    }
-                }catch(e){
-                    console.log("Internal Server Error");
-                }
-        }
-        fetchProducts()
-    },[])
+    //SE COMENTO Para poder ejecutar la vista------------------------------------------------------------------------------------------------------------------------
 
+    // useEffect(()=>{
+    //     const fetchProducts = async () =>{
+    //             try{
+    //                 const response = await axios.get(`${baseUrl}/publication/allPublications`)
+    //                 if(response.status === 200){
+    //                     setAllPublications(response.data)
+    //                 }else{
+    //                     console.log("BAD RETURN OFF SERVER");
+    //                 }
+    //             }catch(e){
+    //                 console.log("Internal Server Error");
+    //             }
+    //     }
+    //     fetchProducts()
+    // },[])
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // se ejecuto esta linea para ejecutar esta vista protegia-------------------------------------------------------------------------------------------------------------------
+    useEffect(() => {
+    const fakeData = [
+        {
+        id: 1,
+        productResponse: {
+            name: "Libro React",
+            description: "Aprende React paso a paso",
+            price: 50000,
+            condition: "Nuevo",
+            img: "https://via.placeholder.com/150",
+            isCloudImage: true
+        }
+        },
+        {
+        id: 2,
+        productResponse: {
+            name: "Laptop usada",
+            description: "Buen estado",
+            price: 1200000,
+            condition: "Usado",
+            img: "https://via.placeholder.com/150",
+            isCloudImage: true
+        }
+        }
+    ];
+
+    setAllPublications(fakeData);
+    }, []);
+
+    //--------------------------------------------------------------------------------------------------------------------------------
     return(
         <>
            <div className="container-primary-publications">
