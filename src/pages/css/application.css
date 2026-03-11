@@ -50,18 +50,20 @@
     background-color: transparent;
 
 }
+
+.container-content-app{
+    display: flex;
+    width: 100vw;
+    flex: 1;
+}
+
 .nav-options-pages{
     /* z-index:100; */
-    width:220px; 
-    background:rgb(51, 112, 180);
-    display:flex;
-    flex-direction:column;
-    position:fixed;
-    left:0;
-    top:60px;
-    height:calc(100vh - 60px);
-    
-
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    background-color: #3370b4;
 }
 
 .nav-options-pages a{
@@ -72,6 +74,7 @@
     font-size: .88em;
     text-transform: uppercase;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .nav-options-pages a:hover{
@@ -79,7 +82,7 @@
 }
 
 .father-div-content-aplication{
-    margin-left:220px;
+    width: 90vw;
 }
 
 
