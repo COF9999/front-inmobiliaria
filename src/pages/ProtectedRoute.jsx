@@ -24,7 +24,7 @@ function NormalSideBar({valueNavHeader}){
     return(
         <nav className={`nav-options-pages`}>
                        <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
-                   
+                         <Link to="/liquidation" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Liquidation</Link> 
          </nav>
     )
 }
@@ -67,6 +67,9 @@ function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
                 >
                     <div className="div-link-redirection">
                       <Link to="/home" onClick={deactiveNavHeaderBody}>Home</Link>
+                    </div>
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Liquidation</Link>
                     </div>
                 </div>
     )
@@ -136,16 +139,18 @@ export function ProtectedRoute(){
                 </div>
             </div>
 
-            {/* SIDEBAR */}
-            <NormalSideBar valueNavHeader={navHeader} />
+            <div className="container-content-app">
+                {/* SIDEBAR */}
+                <NormalSideBar valueNavHeader={navHeader} />
 
-            <HamburguerSideBar
-                setNavHeaderBody={setNavHeaderBody}
-                navHeaderBody={navHeaderBody}
-            />
+                <HamburguerSideBar
+                    setNavHeaderBody={setNavHeaderBody}
+                    navHeaderBody={navHeaderBody}
+                />
 
-            <div className="father-div-content-aplication">
-                <Outlet />
+                <div className="father-div-content-aplication">
+                    <Outlet />
+                </div>
             </div>
     </div>
     : <Navigate to="/"></Navigate>

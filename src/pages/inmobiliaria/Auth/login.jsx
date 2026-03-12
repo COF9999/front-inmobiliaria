@@ -61,7 +61,7 @@ export const Login = () => {
     login(fakeToken); // Simula autenticación
     localStorage.setItem("token", fakeToken);
 
-    navigate('/home');
+    navigate('/liquidation');
 
     // hasta aqui la simulacion del backend----------------------------------------------------------------------------------
     

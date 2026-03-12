@@ -11,6 +11,9 @@ import { Detail } from './pages/PublicationFolder/DetailPublication.jsx';
 import { Transaction } from './pages/TransactionFolder/Transaction.jsx';
 import {ProtectedRoute} from './pages/ProtectedRoute.jsx';
 import { AuthProvider } from './pages/AuthProvider.jsx';
+import { RootHome } from './pages/inmobiliaria/home/RootHome.jsx';
+import { RootLiquidation } from './pages/inmobiliaria/liquidation/RootLiquidation.jsx';
+import { Liquidation } from './pages/inmobiliaria/liquidation/Liquidation.jsx';
 
 const router = createBrowserRouter([
   {
@@ -29,10 +32,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/home',
-        element: <ContainerPublication />,
+        element: <RootHome />,
         children:[
           // {index:true, element: <Publication />},
           {index:true, element: <Home />},
+          // {path: 'detail/:id', element: <Detail />}
+        ]
+      }, 
+
+
+      {
+        path: '/liquidation',
+        element: <RootLiquidation />,
+        children:[
+          // {index:true, element: <Publication />},
+          {index:true, element: <Liquidation />},
           // {path: 'detail/:id', element: <Detail />}
         ]
       }, 
