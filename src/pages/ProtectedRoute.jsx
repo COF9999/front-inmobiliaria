@@ -83,10 +83,6 @@ export function ProtectedRoute(){
     const [navHeaderBody,setNavHeaderBody] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-    const exitSesion = () =>{
-        logout()
-    }
-
 
     useEffect(() => {
         const handleResize = () => {
@@ -134,7 +130,7 @@ export function ProtectedRoute(){
                         <Link to={"/my-profile"}>@{username}</Link>
                     </div>
                     <div className="div-close-session">   
-                     <a onClick={exitSesion}>Cerrar sesión</a>
+                     <a onClick={()=> logout()}>Cerrar sesión</a>
                     </div>
                 </div>
             </div>
