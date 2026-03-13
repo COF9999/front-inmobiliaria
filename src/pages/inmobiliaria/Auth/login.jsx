@@ -32,7 +32,6 @@ export const Login = () => {
   const {login} = useContext(AuthContext);
   const {usernameContext} = useContext(AuthContext)
   const navigate = useNavigate();
-  const usernameRef = useRef()
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [titleCueThings,setTitleCueThings] = useState(true)
   useEffect(() => {

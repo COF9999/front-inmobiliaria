@@ -5,15 +5,15 @@ import './app.css'
 import { Login } from './pages/inmobiliaria/Auth/login.jsx';
 import { Register } from './pages/inmobiliaria/Auth/Register.jsx';
 import { Home } from './pages/inmobiliaria/pagesInmobiliaria/Home.jsx';
-import { ContainerPublication } from './pages/PublicationFolder/RootPublication.jsx';
-import { Publication } from './pages/PublicationFolder/Publication.jsx';
-import { Detail } from './pages/PublicationFolder/DetailPublication.jsx';
 import { Transaction } from './pages/TransactionFolder/Transaction.jsx';
 import {ProtectedRoute} from './pages/ProtectedRoute.jsx';
 import { AuthProvider } from './pages/AuthProvider.jsx';
 import { RootHome } from './pages/inmobiliaria/home/RootHome.jsx';
 import { RootLiquidation } from './pages/inmobiliaria/liquidation/RootLiquidation.jsx';
 import { Liquidation } from './pages/inmobiliaria/liquidation/Liquidation.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -63,89 +63,13 @@ const router = createBrowserRouter([
 }
 );
 
-
-// const router = createBrowserRouter(
-//   [
-//     {
-//       path: '/',
-//       element: <Login /> // Página principal
-//     },
-//     {
-//       path: '/app/register',
-//       element: <Register />
-//     },
-//     {
-//       path: '/app/green-page',
-//       element: <StaticGreenPage />
-//     },
-//     {
-//       path: '/app',
-//       element: <ProtectedRoute />,
-//       children: [
-//         {
-//           path: 'publications',
-//           element: <ContainerPublication />,
-//           children: [
-//             {
-//               index: true,
-//               element: <Publication />
-//             },
-//             {
-//               path: 'detail/:id',
-//               element: <Detail />
-//             }
-//           ]
-//         },
-//         {
-//           path: 'my-products',
-//           element: <ContainerProduct />,
-//           children: [
-//             {
-//               index: true,
-//               element: <Product />
-//             },
-//             {
-//               path: 'create',
-//               element: <CreateProduct />
-//             }
-//           ]
-//         },
-//         {
-//           path: 'my-publications',
-//           element: <ContainerMyPublications />,
-//           children: [
-//             {
-//               index: true,
-//               element: <MyPublications />
-//             },
-//             {
-//               path: 'detail/:id',
-//               element: <DetailMyPublications />
-//             }
-//           ]
-//         },
-//         {
-//           path: 'my-profile',
-//           element: <Profile />
-//         },
-//         {
-//           path: 'offer',
-//           element: <Offer />
-//         },
-//         {
-//           path: 'transacciones',
-//           element: <Transaction />
-//         }
-//       ]
-//     }
-//   ]
-// );
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
 

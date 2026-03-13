@@ -1,9 +1,12 @@
 import React, { useContext,useEffect,useState } from "react";
 import { Outlet, Navigate, Link } from "react-router-dom";
 import { AuthContext } from "./AuthProvider"; // Asegúrate de ajustar la ruta de importación
-import { LoginContext } from "./inmobiliaria/Auth/login";
+import { verifySession } from "./inmobiliaria/consults/axios"; 
+import { useQuery } from '@tanstack/react-query';
+import { useOutletContext } from 'react-router-dom';
 import "./css/application.css"
 import "./css/resize.css"
+
 
 import logoHabitar from "../assets/habitarr.png"
 
@@ -74,81 +77,87 @@ function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
                 </div>
     )
 }
-export function ProtectedRoute(){
-    const { isAuth } = useContext(AuthContext);
-    const { logout } = useContext(AuthContext);
-    const {username} = useContext(AuthContext)
-    const [navHeader,setNavHeader] = useState(true)
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [navHeaderBody,setNavHeaderBody] = useState(false)
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-            if (window.innerWidth <= 1200) {
-                setMenuOpen(true);
-                setNavHeader(false)
-            } else {
-                setMenuOpen(false);
-                setNavHeader(true)
-                setNavHeaderBody(false)
-            }
-        };
+function useWindowSize() {
+  const [size, setSize] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => setSize(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-        window.addEventListener('resize', handleResize);
+  return size;
+}
 
-        // Initial check
-        handleResize();
+export function ProtectedRoute() {
+  const screenWidth = useWindowSize();
+  const { logout, username } = useContext(AuthContext);
 
-        return () => window.removeEventListener('resize', handleResize);
-    });
+  console.log("PARTE 1");
 
+  // 1. Validar sesión con TanStack Query
+  const { data: authObj, isLoading, isError } = useQuery({
+    queryKey: ['auth'],
+    queryFn: verifySession, // Tu función de validación
+    retry: false,
+    staleTime: 600000, // 10 min
+  });
 
-    return (
-        isAuth
-        ? <div className="container-application">
-            <div className="container-nav-application">
-                <div className="div-nav-application-cue">
-                    <img src={logoHabitar} alt="cue-img" />
-                </div>
-                <IconMenuResize
-                    valueMenuOpen={menuOpen}
-                    toggleMenu={setMenuOpen}
-                    navHeaderBody={navHeaderBody}
-                    setNavHeaderBody={setNavHeaderBody}
-                />
+  // 2. Lógica de UI derivada del ancho de pantalla (sin useEffects extra)
+  const isMobile = screenWidth <= 1200;
+  const [navHeaderBody, setNavHeaderBody] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(isMobile);
 
-                {/* <NavHeader
-                    valueNavHeader={navHeader}
-                >
-                </NavHeader> */}
+  if (isLoading) return <p>Cargando aplicación...</p>;
 
-                <div className="div-nav-auth">
-                    <div className="div-nav-profile">
-                        <Link to={"/my-profile"}>@{username}</Link>
-                    </div>
-                    <div className="div-close-session">   
-                     <a onClick={()=> logout()}>Cerrar sesión</a>
-                    </div>
-                </div>
+  if (isError || !authObj) return <Navigate to="/" />;
+  
+
+  console.log("PASO");
+  
+
+  return (
+    <div className="container-application">
+      <header className="container-nav-application">
+        <div className="div-nav-application-cue">
+          <img src={logoHabitar} alt="logo" />
+        </div>
+        
+        <IconMenuResize
+          valueMenuOpen={menuOpen}
+          toggleMenu={setMenuOpen}
+          navHeaderBody={navHeaderBody}
+          setNavHeaderBody={setNavHeaderBody}
+        />
+
+        <div className="div-nav-auth">
+
+            <div className="div-nav-profile">
+                    <Link to="/my-profile">@{authObj.username || username}</Link>
+            </div> 
+
+            <div className="div-close-session">   
+                        <a onClick={()=> logout()}>Cerrar sesión</a>
             </div>
+        </div>
+      </header>
 
-            <div className="container-content-app">
-                {/* SIDEBAR */}
-                <NormalSideBar valueNavHeader={navHeader} />
+      <div className="container-content-app">
+        {/* Usamos !isMobile para decidir qué sidebar mostrar */}
+        <NormalSideBar valueNavHeader={!isMobile} />
+        
+        <HamburguerSideBar
+          setNavHeaderBody={setNavHeaderBody}
+          navHeaderBody={navHeaderBody}
+        />
 
-                <HamburguerSideBar
-                    setNavHeaderBody={setNavHeaderBody}
-                    navHeaderBody={navHeaderBody}
-                />
-
-                <div className="father-div-content-aplication">
-                    <Outlet />
-                </div>
-            </div>
+        <main className="father-div-content-aplication">
+          {/* Pasamos los datos del usuario a todas las rutas hijas */}
+          <Outlet context={authObj} />
+        </main>
+      </div>
     </div>
-    : <Navigate to="/"></Navigate>
-    )
+  );
 }

@@ -4,11 +4,5 @@ import { Outlet, Navigate} from "react-router-dom";
 
 
 export function RootHome(){
-    const {isAuth} = useContext(AuthContext)
-
-    return(
-        isAuth
-        ? <Outlet></Outlet>
-        : <Navigate to="/login"></Navigate>
-    )
+    return <Outlet></Outlet>
 }
