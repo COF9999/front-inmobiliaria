@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react"
-import axios from "axios";
-import { baseUrl } from "../../../../hostConfig";
 import { FilterSvgLiquidation } from "../pureComponents/svg/Svg";
-import "../css/liquidation.css"
 import { TableObjects,MenuToggle } from "../pureComponents/components/component";
-import { buildNormalHeader } from "../staticMethods/Security";
+import { useOutletContext } from 'react-router-dom';
+import api from "../instances/axios";
+import "../css/liquidation.css"
 
 const getDealsNotProccesed = async (valueFilter,setListOperate)=>{
 
@@ -17,11 +16,9 @@ const getDealsNotProccesed = async (valueFilter,setListOperate)=>{
         milesecondsStartDay: null, // Long (representado como Number o BigInt en JS)
         milesecondsEndDay: null 
     }
-
-    const token = ""
-    
+ 
     try{
-        const response = await axios.post(`${baseUrl}/deal/deals-not-proccesed`,requestBody,buildNormalHeader(token))
+        const response = await api.post("/deal/deals-not-proccesed",requestBody)
         if(response.status === 200){
             setListOperate(response.data)
             console.log(response.data);
@@ -36,7 +33,6 @@ const getDealsNotProccesed = async (valueFilter,setListOperate)=>{
 
 
 export const Liquidation = () => {
-  
   const [listOperate,setListOperate] = useState([])
   const [componentFilter,setComponentFilter] = useState(false)
   const [valueResultComponentFilter,setValueResultComponentFilter] = useState("")

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider';// Asegúrate de ajustar la ruta de importación
 import '../css/login.css'
 import {baseUrl} from "../../../../hostConfig";
+import api from '../instances/axios';
 
 export const LoginContext = createContext()
 
@@ -31,7 +32,6 @@ export const Login = () => {
   const {login} = useContext(AuthContext);
   const {usernameContext} = useContext(AuthContext)
   const navigate = useNavigate();
-  const usernameRef = useRef()
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [titleCueThings,setTitleCueThings] = useState(true)
   useEffect(() => {
@@ -55,41 +55,34 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulación de respuesta del backend------------------------------------------------------------------------
-    const fakeToken = "fake-jwt-token-123";
-
-    login(fakeToken); // Simula autenticación
-    localStorage.setItem("token", fakeToken);
-
-    navigate('/liquidation');
-
-    // hasta aqui la simulacion del backend----------------------------------------------------------------------------------
     
     // se comento esta linea para pasar el login-----------------------------------------------------------------------------
-    // try {
-    //   // Envía los datos del formulario al servidor para iniciar sesión
-    //   const response = await axios.post(`${baseUrl}/user/auth`, {
-    //     "identification":username,
-    //     password,
-    //   });
+    try {
+      // Envía los datos del formulario al servidor para iniciar sesión
+      const response = await api.post("/login", {
+        "email":username,
+        password,
+      });
 
-    //   // Si el inicio de sesión es exitoso, guarda el token JWT y establece isAuth en true
-    //   if (response.status === 200 && response.data.authenticationResponseDTO.token) {
-    //     const nameUsername = response.data.users.username
-    //     usernameContext(nameUsername)
-    //     localStorage.setItem("username",nameUsername)
-    //     login(response.data.authenticationResponseDTO.token); // Guarda el token JWT en el contexto de autenticación
-    //     navigate('publications'); // Redirige al usuario a la página de publicaciones
-    //   } else {
-    //     // Si hay un error en el servidor, muestra un mensaje de error
-    //     alert('Error al iniciar sesión');
-    //   }
-    // } catch (error) {
-    //   // Si hay un error de red o cualquier otro error, muestra un mensaje de error
-    //   alert('Error al inicar sesion'+error);
-    //   console.error(error);
-    // }
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      // Si el inicio de sesión es exitoso, guarda el token JWT y establece isAuth en true
+      if (response.status === 200) {
+        console.log("Ok");
+        
+        const nameUsername = response.data.username
+        usernameContext(nameUsername)
+        localStorage.setItem("username",nameUsername)
+        login(true)
+        navigate('/liquidation'); // Redirige al usuario a la página de publicaciones
+      } else {
+        // Si hay un error en el servidor, muestra un mensaje de error
+        alert('Error al iniciar sesión');
+      }
+    } catch (error) {
+      // Si hay un error de red o cualquier otro error, muestra un mensaje de error
+      alert('Error al inicar sesion'+error);
+      console.error(error);
+    }
+    
   };
 
   return (
