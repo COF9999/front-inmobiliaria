@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import api from './inmobiliaria/instances/axios';
+import api from './apiAxios';
 // Crea el contexto de autenticación
 export const AuthContext = createContext();
 
