@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider';// Asegúrate de ajustar la ruta de importación
 import '../css/login.css'
 import {baseUrl} from "../../../../hostConfig";
-import api from '../instances/axios';
+import api from '../../apiAxios';
 
 export const LoginContext = createContext()
 

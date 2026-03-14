@@ -95,7 +95,6 @@ export function ProtectedRoute() {
   const screenWidth = useWindowSize();
   const { logout, username } = useContext(AuthContext);
 
-  console.log("PARTE 1");
 
   // 1. Validar sesión con TanStack Query
   const { data: authObj, isLoading, isError } = useQuery({
@@ -113,9 +112,6 @@ export function ProtectedRoute() {
   if (isLoading) return <p>Cargando aplicación...</p>;
 
   if (isError || !authObj) return <Navigate to="/" />;
-  
-
-  console.log("PASO");
   
 
   return (

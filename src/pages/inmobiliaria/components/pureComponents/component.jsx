@@ -1,15 +1,17 @@
 
 import "../../css/components.css"
+import { convertStringDate } from "../../consults/date";
+import { formatCurrencyLocal } from "../../consults/numbers";
+import { ButtonAction } from "./buttons";
 
-
-export function TableObjects({list,propertyColumns}){
+export function TableObjects({list,propertyColumns,listActions}){
 
   return <table className="liquidation-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Owner ID</th>
-              <th>Pipeline</th>
+              <th>Id_negocio</th>
+              <th>Id_user</th>
+              <th>Tipo_negocio</th>
               {/* Generamos encabezados dinámicos para las propiedades */}
               {propertyColumns.map(col => <th key={col}>{col}</th>)}
             </tr>
@@ -22,9 +24,17 @@ export function TableObjects({list,propertyColumns}){
                   <td>{item.ownerId}</td>
                   <td>{item.pipelineType}</td>
                   {/* Accedemos al Map de properties */}
-                  {propertyColumns.map(col => (
-                    <td key={col}>{item.properties[col] || "-"}</td>
-                  ))}
+                  <td>{item.properties["dealname"] || "-"}</td>
+                  <td>{formatCurrencyLocal(item.properties["amount"]) || "-"}</td>
+                  <td>{convertStringDate(item.properties["closedate"]) || "-"}</td>
+                  {listActions.map((action,index)=>{
+                    return <td key={`${item.id+"--"+index}`}>
+                            <ButtonAction
+                              SvgComponent={action.svg}
+                              action={()=> action.event(item)}
+                       /> 
+                      </td>
+                  })}
                 </tr>
               ))
             ) : (
@@ -37,7 +47,6 @@ export function TableObjects({list,propertyColumns}){
           </tbody>
         </table>
 }
-
 
 export function SearchInput({value,onChange,onIconClick,refInput}){
     return(
@@ -60,7 +69,10 @@ export function SearchInput({value,onChange,onIconClick,refInput}){
     )
 }
 
-export function MenuToggle({ typeFilter,valueResultComponentFilter,setValueResultComponentFilter,options = [], onSelect, open,setOpen }) {
+export function MenuToggle({ typeFilter,valueResultComponentFilter,options = [], onSelect, open,setOpen }) {
+
+  console.log(valueResultComponentFilter);
+  
 
   return (
     <div className="menu-toggle-container">
@@ -69,9 +81,10 @@ export function MenuToggle({ typeFilter,valueResultComponentFilter,setValueResul
         className="menu-toggle-button"
         onClick={() => setOpen(!open)}
       >
-        {valueResultComponentFilter?.trim()
-        ?`${valueResultComponentFilter} dias`
-        :"Opciones"
+        {
+          (typeof valueResultComponentFilter!=="object" && valueResultComponentFilter!=="")
+          ? `${valueResultComponentFilter} dias`
+          :"Opciones"
         }
 
         <svg viewBox="0 0 24 24">
@@ -85,12 +98,20 @@ export function MenuToggle({ typeFilter,valueResultComponentFilter,setValueResul
             <li
               key={opt.value}
               onClick={() => {
-                onSelect({
+
+                if(opt.value === ""){
+                  onSelect({
+                    "filter":"",
+                    "value":""
+                })
+                }else{
+                    onSelect({
                     "filter":typeFilter,
                     "value":opt.value
                 });
+                }
+                
                 setOpen(false);
-                setValueResultComponentFilter(opt.value)
               }}
             >
               {opt.label}
@@ -101,4 +122,14 @@ export function MenuToggle({ typeFilter,valueResultComponentFilter,setValueResul
 
     </div>
   );
+}
+
+export function WrapperUniqueFilter({ComponentA,ComponentB}){
+  return(
+      <div className="wrapper-unique-filter">
+           {ComponentA}
+           {ComponentB}
+      </div>
+     
+  )
 }
