@@ -4,17 +4,24 @@ import { TableObjects,MenuToggle } from "../../components/pureComponents/compone
 import { ButtonAction } from "../../components/pureComponents/buttons.jsx";
 import { RangeCalendar } from "../../components/externalComponents/Calendar.jsx";
 import { WrapperUniqueFilter } from "../../components/pureComponents/component.jsx";
+import { convertStringDate } from "../../consults/date";
+import { formatCurrencyLocal } from "../../consults/numbers";
 import api from "../../apiAxios.js";
 import "../../css/liquidation.css"
 
 
 
-const getDealsNotProccesed = async ({objBody,setListOperate})=>{
+const getDealsNotProccesed = async ({objBody,setListOperate,setNoValues})=>{
     try{
         const response = await api.post("/deal/deals-not-proccesed",objBody)
         if(response.status === 200){
-            setListOperate(response.data)
-            console.log(response.data);
+          const data = response.data;
+            if(data.length === 0){
+              setNoValues(true)
+            }else{
+              setNoValues(false)
+            }
+            setListOperate(data)
         }else{
             console.log("BAD RETURN OFF SERVER");
         }
@@ -71,10 +78,13 @@ export const Liquidation = () => {
   const [listOperate,setListOperate] = useState([])
   const [componentFilter,setComponentFilter] = useState(false)
   const [valueResultComponentFilter,setValueResultComponentFilter] = useState("")
-  const propertyColumns = ["Nombre_negocio", "Valor","Cierre", "Acciones"];
+  const subListPropertyColums = ["dealname", "amount","closedate"]
+  const propertyColumns = ["id","ownerId","pipelineType"]
   const [stateInfoFilter,setStateInfoFilter] = useState({})
+  const [noValues,setNoValues] = useState(false)
   const [isActivePopUpFilter,setIsActivePopUpFilter] = useState(false)
 
+ 
   const optionsMenuTogge = [
     { label: "", value: "" },
     { label: "8", value: "8" },
@@ -90,7 +100,7 @@ export const Liquidation = () => {
     }
   ]
 
-  const filterActions = 
+  const pageActions = 
      {
       "svg": FilterSvgLiquidation,
       "event": (state) => setIsActivePopUpFilter(state) 
@@ -116,7 +126,8 @@ export const Liquidation = () => {
       case "by-days-month": 
           getDealsNotProccesed({
             objBody:{onlyDay:Number(valueFilter)},
-            setListOperate: setListOperate  
+            setListOperate: setListOperate ,
+            setNoValues: setNoValues
           })          
       break
       case "between-days-month": 
@@ -125,7 +136,8 @@ export const Liquidation = () => {
                 dateOne: valueFilter.dateOne,                  
                 dateSecond: valueFilter.dateSecond,              
              },
-            setListOperate: setListOperate  
+            setListOperate: setListOperate,
+            setNoValues: setNoValues
           })          
       break
     }
@@ -150,8 +162,8 @@ export const Liquidation = () => {
         <div className="container-primary-options">
           <div className="content-filter-svg-liquidation">
             <ButtonAction
-              SvgComponent={filterActions.svg}
-              action={()=> filterActions.event(!isActivePopUpFilter)}
+              SvgComponent={pageActions.svg}
+              action={()=> pageActions.event(!isActivePopUpFilter)}
             ></ButtonAction>
           </div>
           <div className="content-dinamic-filter-options">
@@ -159,6 +171,11 @@ export const Liquidation = () => {
             <WrapperUniqueFilter
               ComponentA={<MenuToggle
                typeFilter={"by-days-month"}
+                clasificationValueSelect={()=>{
+                   return (typeof valueResultComponentFilter!=="object" && valueResultComponentFilter!=="")
+                    ? `${valueResultComponentFilter} dias`
+                    :"Opciones"
+                }}
                 valueResultComponentFilter={valueResultComponentFilter}
                 setValueResultComponentFilter={value=> setValueResultComponentFilter(value)}
                 options={optionsMenuTogge}
@@ -202,9 +219,27 @@ export const Liquidation = () => {
         <div className="container-body-deals">
            <TableObjects
               list={listOperate}
-              setListOperate={(data)=> setListOperate(data)}
+              subListPropertyColums={subListPropertyColums}
               propertyColumns={propertyColumns}
+             coverPropertyColums={(item) => {
+                  return propertyColumns.map((property) => {
+                    const value = item[property];
+                    return (
+                      <td key={`cell-${item.id}-${property}`}> {/* Key única por celda */}
+                        {typeof value === "boolean" ? (value ? "Si" : "No") : value}
+                      </td>
+                    );
+                  });
+              }}
               listActions={listActions}
+              subList={(item)=> {
+                 return <>
+                        <td key={`sub-name-${item.id}`}>{item.properties["dealname"]}</td>
+                        <td key={`sub-amount-${item.id}`}>{formatCurrencyLocal(item.properties["amount"])}</td>
+                        <td key={`sub-date-${item.id}`}>{convertStringDate(item.properties["closedate"])}</td>
+                    </>
+              }}
+              noValues={noValues}
            />
         </div>
 

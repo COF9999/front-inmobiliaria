@@ -1,6 +1,6 @@
-import React, { useContext,useEffect,useState } from "react";
+import { useContext,useEffect,useState } from "react";
 import { Outlet, Navigate, Link } from "react-router-dom";
-import { AuthContext } from "./AuthProvider"; // Asegúrate de ajustar la ruta de importación
+import { AuthContext } from "./AuthProvider"; 
 import { verifySession } from "./consults/axios"; 
 import { useQuery } from '@tanstack/react-query';
 import "./cssglobal/application.css"
@@ -19,14 +19,15 @@ function NormalSideBar({valueNavHeader}){
         return
     }
 
-    const changeSelectValueOption = (key)=>{
-        setSelectOptionNav(key)
-    }
+    const changeSelectValueOption = (key)=> setSelectOptionNav(key)
+    
  
     return(
         <nav className={`nav-options-pages`}>
                        <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
-                         <Link to="/liquidation" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Liquidation</Link> 
+                       <Link to="/liquidation" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Liquidation</Link>
+                       <Link to="/user" className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Usuario</Link> 
+                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios cerrados</Link>  
          </nav>
     )
 }

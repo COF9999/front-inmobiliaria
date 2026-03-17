@@ -69,3 +69,49 @@ export const RestoreTrashIcon = ({ size = 24, color = "#000000", className = "" 
     </svg>
   );
 };
+
+
+export const ChangeRoleIcon = ()=>{
+  return(
+    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+      <g id="Layer_1">
+        <rect x="11.7" y="5" width="20" height="20" rx="2" />
+        <rect x="2.4" y="28" width="30" height="18" rx="2" />
+        <rect x="35" y="30" width="15" height="15" rx="1" />
+        <rect x="41" y="32" width="3" height="11" fill="#FFFFFF" />
+        <rect x="38" y="35" width="9" height="3" fill="#FFFFFF" />
+      </g>
+  </svg>
+  )
+}
+
+export const ClosePopUp = ({ size = 20, color = "#000" }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line
+        x1="6"
+        y1="6"
+        x2="18"
+        y2="18"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <line
+        x1="18"
+        y1="6"
+        x2="6"
+        y2="18"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
