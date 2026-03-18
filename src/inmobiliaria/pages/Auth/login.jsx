@@ -32,6 +32,23 @@ export const Login = () => {
   const navigate = useNavigate();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [titleCueThings,setTitleCueThings] = useState(true)
+
+  // useEffect(() => {
+  //     const getUser = async () => {
+  //       try {
+  //         const response = await api.get("/user/1");
+  //         console.log(response.data);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+
+  //     getUser();
+  //   }, []);  
+
+
+
+
   useEffect(() => {
     const handleResize = () => {
         setScreenWidth(window.innerWidth);
