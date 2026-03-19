@@ -1,6 +1,6 @@
-
+import { ButtonAction} from "./buttons";
+import { ClosePopUp } from "../svg/Svg";
 import "../../css/components.css"
-import { ButtonAction } from "./buttons";
 
 
 export function TableObjects({propertyColumns,subListPropertyColums,coverPropertyColums,list,subList,listActions,noValues}){
@@ -30,7 +30,7 @@ export function TableObjects({propertyColumns,subListPropertyColums,coverPropert
                     <td key={`${item.id}-action-${index}`}>
                       <ButtonAction
                         SvgComponent={action.svg}
-                        action={() => action.event(item)}
+                        action={() => action.event(item,action)}
                       />
                     </td>
                   ))
@@ -125,5 +125,26 @@ export function WrapperUniqueFilter({ComponentA,ComponentB}){
            {ComponentB}
       </div>
      
+  )
+}
+
+export function Overlay({nameHeader,content,onCancel}){
+  return(
+    <div className="overlay">
+            <div className="content-overlay">
+                <div className="header-overlay">
+                    <h3>{nameHeader}</h3>
+                </div>
+                {
+                  content
+                }
+                 <div className="box-close-overlay">
+                        <ButtonAction
+                            SvgComponent={ClosePopUp}
+                            action={()=> onCancel("")}
+                        />
+                </div>   
+            </div>
+        </div>
   )
 }

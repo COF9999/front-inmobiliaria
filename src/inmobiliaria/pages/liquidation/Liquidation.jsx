@@ -6,7 +6,7 @@ import { RangeCalendar } from "../../components/externalComponents/Calendar.jsx"
 import { WrapperUniqueFilter } from "../../components/pureComponents/component.jsx";
 import { convertStringDate } from "../../consults/date";
 import { formatCurrencyLocal } from "../../consults/numbers";
-import api from "../../apiAxios.js";
+import api from "../../apiAxios.js"
 import "../../css/liquidation.css"
 
 
@@ -96,7 +96,7 @@ export const Liquidation = () => {
   const listActions = [
     {
       "svg":LiquidationSvgClose,
-      "event": (deal) => closeSelectDeal(deal) 
+      "event": (deal,self) => closeSelectDeal(deal) 
     }
   ]
 
