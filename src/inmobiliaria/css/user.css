@@ -1,3 +1,11 @@
+:root {
+  --primary: #2563eb;
+  --bg-input: #ffffff;
+  --border: #d1d5db;
+  --text: #374151;
+  --radius: 8px;
+}
+
 .wrapper-popup-role{
     min-height: 150px;
     padding: 0px 10px 20px 10px;
@@ -11,4 +19,104 @@
 .container-action-single-role{
     display: flex;
     justify-content: center;
+}
+
+.user-form {
+  max-width: 800px;
+  background: #f9fafb;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.user-form h3 {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-sizing: border-box; /* Evita que el padding desborde */
+  transition: border 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Roles en formato Chips */
+.roles-selection {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip-checkbox input {
+  display: none; /* Escondemos el checkbox original */
+}
+
+.chip-checkbox span {
+  display: inline-block;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.chip-checkbox input:checked + span {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-save {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
 }

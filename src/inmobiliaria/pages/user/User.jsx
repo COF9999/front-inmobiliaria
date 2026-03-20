@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { TableObjects,MenuToggle, Overlay } from "../../components/pureComponents/component"
-import { ChangeRoleIcon,ClosePopUp } from "../../components/svg/Svg"
+import { ChangeRoleIcon,ClosePopUp,AddUser } from "../../components/svg/Svg"
 import { getListUsers,changeRole } from "./services/callApiUser"
 import { extractRoles } from "./services/utilUser"
 import { ButtonAction } from "../../components/pureComponents/buttons"
@@ -65,7 +65,6 @@ export const User = () => {
             if(objectRoles === null ||  !Object.values(objectRoles).every(val => val && val.trim() !== "")) return
 
             const data = await changeRole(item,objectRoles,self.type)
-            console.log(data);
             
             if(typeof data === "object"){
                 await OpenPromise("MESSAGE",{
@@ -79,7 +78,21 @@ export const User = () => {
                 })
             }
         }
-      }
+      },
+      {
+        "type":"CREATE-USER",
+        "svg":AddUser,
+        "event": async (item,self) => {
+            
+            const objectUser = await OpenPromise(self.type,{id:self.type})
+
+            if(objectUser === null) return 
+
+            console.log(objectUser);
+            
+        }
+      },
+
     ]
   
   useEffect(()=>{
@@ -88,6 +101,10 @@ export const User = () => {
 
   const whichModalIsActive = ['ROLE-CHANGE','ROLE-ADD','ROLE-DELETE'].map(id=> getModal(id)).find(m=> m.isOpen)
   const messageDialog = getModal("MESSAGE")
+  const createUserPopUp = getModal("CREATE-USER")
+
+  console.log(createUserPopUp);
+  
   
   return (
     <div className="container-primary-user">
@@ -139,18 +156,21 @@ export const User = () => {
            fullInfo={messageDialog.fullInfo}
            onCancel={()=> ClosePromise(messageDialog.fullInfo.id,null)}
         />
+
+        <PopUpCreateUser
+            isActive={createUserPopUp.isOpen}
+            onCancel={()=> ClosePromise(createUserPopUp.id,null)}
+        />
+
+
     </div>
   )
 }
 
 
-function PopUpActionsRole({isActive,typeFilter,roleList,fullRoleList,onComfirm,onCancel}){
+function PopUpActionsRole({isActive,typeFilter,roleList,fullRoleList,onComfirm,onCancel}){    
+    if(isActive == false ) return null
 
-    
-    console.log(fullRoleList);
-    
-    
-    if(isActive === false ) return null
     const [valueResultMenuTogge1,setValueResultMenuTogge1]= useState("")
     const [valueResultMenuTogge2,setValueResultMenuTogge2]= useState("")
     const [isActiveMennuTogge1,setIsActiveMenuTogge1] = useState(false)
@@ -199,6 +219,89 @@ function PopUpActionsRole({isActive,typeFilter,roleList,fullRoleList,onComfirm,o
        
     )  
 }
+
+function PopUpCreateUser({isActive,onCancel}) {
+
+   if(isActive==false) return 
+
+   console.log(isActive);
+   
+
+    const contentToRender = {
+        header:null,
+        content:null
+    }
+    contentToRender.header = "CREATE-USER"
+    contentToRender.content = (
+        <form className="user-form"> 
+            <div className="form-grid">
+            
+            <div className="form-section">
+                <h3>Datos Personales</h3>
+                <div className="field">
+                <label htmlFor="name">Nombre Completo</label> {/* htmlFor en lugar de for */}
+                <input type="text" id="name" placeholder="Ej. Juan Pérez" />
+                </div>
+                <div className="field">
+                <label htmlFor="identification">Identificación</label>
+                <input type="text" id="identification" placeholder="DNI / Cédula" />
+                </div>
+                <div className="field">
+                <label htmlFor="hubId">Hub ID</label>
+                <input type="text" id="hubId" placeholder="ID de conexión" />
+                </div>
+            </div>
+
+            
+            <div className="form-section">
+                <h3>Acceso y Contacto</h3>
+                <div className="field">
+                <label htmlFor="username">Username</label>
+                <input type="text" id="username" placeholder="usuario123" />
+                </div>
+                <div className="field">
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" placeholder="correo@ejemplo.com" />
+                </div>
+                <div className="field">
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" />
+                </div>
+            </div>
+            </div>
+
+            <div className="form-section roles-full-width">
+            <h3>Asignación de Roles</h3>
+            <div className="roles-selection">
+                <label className="chip-checkbox">
+                <input type="checkbox" name="roles" value="admin" />
+                <span>Administrador</span>
+                </label>
+                <label className="chip-checkbox">
+                <input type="checkbox" name="roles" value="editor" />
+                <span>Editor</span>
+                </label>
+                <label className="chip-checkbox">
+                <input type="checkbox" name="roles" value="viewer" />
+                <span>Lector</span>
+                </label>
+            </div>
+            </div>
+
+            <button type="submit" className="btn-save">Guardar Usuario</button>
+        </form>
+    )
+
+
+  return (
+    <Overlay
+        nameHeader={contentToRender.header}
+        content={contentToRender.content}
+        onCancel={onCancel}
+    /> 
+  ); 
+}
+
 
 
 function PopUpMessageDialog({isActive,fullInfo,onCancel}){
