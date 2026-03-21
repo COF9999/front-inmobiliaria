@@ -1,8 +1,10 @@
 import React, { useContext,useEffect,useState } from "react";
 import { Outlet, Navigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider"; // Asegúrate de ajustar la ruta de importación
 import { verifySession } from "./consults/axios"; 
 import { useQuery } from '@tanstack/react-query';
+import { UserMenu } from "./components/pureComponents/UserMenu";
 import "./cssglobal/application.css"
 import "./cssglobal/resize.css"
 
@@ -30,8 +32,8 @@ function NormalSideBar({valueNavHeader}){
          </nav>
     )
 }
-
-function IconMenuResize({valueMenuOpen,toggleMenu,setNavHeaderBody,navHeaderBody}){
+ 
+function IconMenuResize({valueMenuOpen, setNavHeaderBody, navHeaderBody}){
 
     if(valueMenuOpen===false){
         return null
@@ -87,6 +89,7 @@ function useWindowSize() { //hook personalizado
 
 export function ProtectedRoute() {
 
+  const navigate = useNavigate();
   const screenWidth = useWindowSize();
   const { logout, username } = useContext(AuthContext);
 
@@ -126,7 +129,11 @@ export function ProtectedRoute() {
                 </div> 
 
                 <div className="div-close-session">   
-                   <a onClick={()=> logout()}>Cerrar sesión</a>
+                    <UserMenu 
+                      logout={logout}
+                      navigate={navigate}
+                      user={{ name: authObj.username || username }}
+                    />
                 </div>
                 
             </div>
