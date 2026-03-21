@@ -1,8 +1,7 @@
 import { useContext,useEffect,useState } from "react";
 import { Outlet, Navigate, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./AuthProvider"; // Asegúrate de ajustar la ruta de importación
-import { AuthContext } from "./AuthProvider"; 
+import { AuthContext } from "./AuthProvider";
 import { verifySession } from "./consults/axios"; 
 import { useQuery } from '@tanstack/react-query';
 import { UserMenu } from "./components/pureComponents/UserMenu";
