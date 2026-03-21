@@ -27,10 +27,9 @@
     justify-content:space-between;
     position: sticky;
     top: 0;
-    /* z-index: 200; */
     border-bottom: 2px solid rgb(202, 210, 42); 
     background-color:#fff;
-   
+    z-index: 1000;
 
 }
 
@@ -113,10 +112,23 @@
 }
 
 .div-close-session{
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
     flex: 1;
     padding-right: 30px;
 }
+
+/* quitar bordes y fondo icono profile */
+.div-close-session button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .div-nav-auth a{
     text-decoration: none;
     color: black;
