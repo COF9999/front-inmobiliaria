@@ -124,32 +124,3 @@
   color: #666;
 }
 
-.overlay{
-   width: 100%;
-    background-color: rgba(176, 173, 173, 0.581);
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    z-index: 200;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.content-overlay{
-  background-color: rgb(30, 30, 227);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    position: relative;
-    border-radius: 10px;
-}
-
-.box-close-overlay{
-  position: absolute;
-    top: 4px;
-    right: 0px;
-    width: max-content;
-}

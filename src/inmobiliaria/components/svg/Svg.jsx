@@ -69,3 +69,81 @@ export const RestoreTrashIcon = ({ size = 24, color = "#000000", className = "" 
     </svg>
   );
 };
+
+
+export const ChangeRoleIcon = ()=>{
+  return(
+    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+      <g id="Layer_1">
+        <rect x="11.7" y="5" width="20" height="20" rx="2" />
+        <rect x="2.4" y="28" width="30" height="18" rx="2" />
+        <rect x="35" y="30" width="15" height="15" rx="1" />
+        <rect x="41" y="32" width="3" height="11" fill="#FFFFFF" />
+        <rect x="38" y="35" width="9" height="3" fill="#FFFFFF" />
+      </g>
+  </svg>
+  )
+}
+
+export const ClosePopUp = ({ size = 20, color = "#000" }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line
+        x1="6"
+        y1="6"
+        x2="18"
+        y2="18"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <line
+        x1="18"
+        y1="6"
+        x2="6"
+        y2="18"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
+
+
+export const AddUser = ({ size = 24, color = "#000000" }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 328 328"
+      fill={color}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+      <g id="SVGRepo_iconCarrier">
+        <g id="XMLID_455_">
+          <path
+            id="XMLID_458_"
+            d="M15,286.75h125.596c19.246,24.348,49.031,40,82.404,40c57.897,0,105-47.103,105-105s-47.103-105-105-105 c-34.488,0-65.145,16.716-84.298,42.47c-7.763-1.628-15.694-2.47-23.702-2.47c-63.411,0-115,51.589-115,115 C0,280.034,6.716,286.75,15,286.75z M223,146.75c41.355,0,75,33.645,75,75s-33.645,75-75,75s-75-33.645-75-75 S181.645,146.75,223,146.75z"
+          />
+          <path
+            id="XMLID_461_"
+            d="M115,1.25c-34.602,0-62.751,28.15-62.751,62.751S80.398,126.75,115,126.75 c34.601,0,62.75-28.148,62.75-62.749S149.601,1.25,115,1.25z"
+          />
+          <path
+            id="XMLID_462_"
+            d="M193,236.75h15v15c0,8.284,6.716,15,15,15s15-6.716,15-15v-15h15c8.284,0,15-6.716,15-15s-6.716-15-15-15 h-15v-15c0-8.284-6.716-15-15-15s-15,6.716-15,15v15h-15c-8.284,0-15,6.716-15,15S184.716,236.75,193,236.75z"
+          />
+        </g>
+      </g>
+    </svg>
+  );
+};

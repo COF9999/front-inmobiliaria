@@ -1,50 +1,51 @@
-
+import { ButtonAction} from "./buttons";
+import { ClosePopUp } from "../svg/Svg";
 import "../../css/components.css"
-import { convertStringDate } from "../../consults/date";
-import { formatCurrencyLocal } from "../../consults/numbers";
-import { ButtonAction } from "./buttons";
 
-export function TableObjects({list,propertyColumns,listActions}){
+
+export function TableObjects({propertyColumns,subListPropertyColums,coverPropertyColums,list,subList,listActions,noValues}){
 
   return <table className="liquidation-table">
           <thead>
             <tr>
-              <th>Id_negocio</th>
-              <th>Id_user</th>
-              <th>Tipo_negocio</th>
               {/* Generamos encabezados dinámicos para las propiedades */}
-              {propertyColumns.map(col => <th key={col}>{col}</th>)}
+              {propertyColumns.map(col => <th key={`Property-colum--${col}`}>{col}</th>)}
+              {subListPropertyColums!=null ? subListPropertyColums.map(col => <th key={`sublist-Property-colum--${col}`}>{col}</th>): ""}
+              {listActions.length!==0? <th>Acciones</th>:""}
             </tr>
           </thead>
-          <tbody>
-            {list.length > 0 ? (
-              list.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.ownerId}</td>
-                  <td>{item.pipelineType}</td>
-                  {/* Accedemos al Map de properties */}
-                  <td>{item.properties["dealname"] || "-"}</td>
-                  <td>{formatCurrencyLocal(item.properties["amount"]) || "-"}</td>
-                  <td>{convertStringDate(item.properties["closedate"]) || "-"}</td>
-                  {listActions.map((action,index)=>{
-                    return <td key={`${item.id+"--"+index}`}>
-                            <ButtonAction
-                              SvgComponent={action.svg}
-                              action={()=> action.event(item)}
-                       /> 
-                      </td>
-                  })}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={3 + propertyColumns.length} style={{textAlign: 'center'}}>
-                  No hay datos disponibles
-                </td>
+         <tbody>
+          {/* El error "0 is not a function" se corrige con el ? y : null */}
+          {!noValues && list.length > 0 ? (
+            list.map((item,index) => (
+              <tr key={`row-${item.id}-${index}`}>
+               
+                {coverPropertyColums ? coverPropertyColums(item) : null}
+
+                {subList ? subList(item) : null}
+
+                {/* Acciones */}
+                {listActions.length > 0 ? (
+                  listActions.map((action, index) => (
+                    <td key={`${item.id}-action-${index}`}>
+                      <ButtonAction
+                        SvgComponent={action.svg}
+                        action={() => action.event(item,action)}
+                      />
+                    </td>
+                  ))
+                ) : null}
               </tr>
-            )}
-          </tbody>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="100%">No hay datos disponibles</td>
+            </tr>
+          )}
+</tbody>
+
+
+
         </table>
 }
 
@@ -69,10 +70,7 @@ export function SearchInput({value,onChange,onIconClick,refInput}){
     )
 }
 
-export function MenuToggle({ typeFilter,valueResultComponentFilter,options = [], onSelect, open,setOpen }) {
-
-  console.log(valueResultComponentFilter);
-  
+export function MenuToggle({ typeFilter,clasificationValueSelect,options = [], onSelect, open,setOpen }) {
 
   return (
     <div className="menu-toggle-container">
@@ -82,11 +80,8 @@ export function MenuToggle({ typeFilter,valueResultComponentFilter,options = [],
         onClick={() => setOpen(!open)}
       >
         {
-          (typeof valueResultComponentFilter!=="object" && valueResultComponentFilter!=="")
-          ? `${valueResultComponentFilter} dias`
-          :"Opciones"
+          clasificationValueSelect()
         }
-
         <svg viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5z"/>
         </svg>
@@ -119,7 +114,6 @@ export function MenuToggle({ typeFilter,valueResultComponentFilter,options = [],
           ))}
         </ul>
       )}
-
     </div>
   );
 }
@@ -131,5 +125,26 @@ export function WrapperUniqueFilter({ComponentA,ComponentB}){
            {ComponentB}
       </div>
      
+  )
+}
+
+export function Overlay({nameHeader,content,onCancel}){
+  return(
+    <div className="overlay">
+            <div className="content-overlay">
+                <div className="header-overlay">
+                    <h3>{nameHeader}</h3>
+                </div>
+                {
+                  content
+                }
+                 <div className="box-close-overlay">
+                        <ButtonAction
+                            SvgComponent={ClosePopUp}
+                            action={()=> onCancel("")}
+                        />
+                </div>   
+            </div>
+        </div>
   )
 }

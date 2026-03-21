@@ -5,3 +5,8 @@ export const convertStringDate = (strDate)=>{
     year: '2-digit'
   })
 }
+
+
+export const generateId = () => {
+  return 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+};

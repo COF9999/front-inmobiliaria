@@ -61,6 +61,7 @@
     width: 10vw;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     min-height: 90vh;
     background-color: #3370b4;
 }
@@ -76,20 +77,15 @@
     text-decoration: none;
 }
 
-.nav-options-pages a:hover{
-    background:#555;
-}
 
 .father-div-content-aplication{
     width: 90vw;
+    padding: 20px;
 }
-
-
 
 
 .sweet-grey{
     background-color: rgba(0, 22, 162, 0.973);
-    height: 100%;
     border-radius: 5px;
 }
 

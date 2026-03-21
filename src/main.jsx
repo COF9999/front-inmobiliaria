@@ -9,6 +9,10 @@ import { AuthProvider } from './inmobiliaria/AuthProvider.jsx';
 import { RootHome } from './inmobiliaria/pages/home/RootHome.jsx';
 import { RootLiquidation } from './inmobiliaria/pages/liquidation/RootLiquidation.jsx';
 import { Liquidation } from './inmobiliaria/pages/liquidation/Liquidation.jsx';
+import { RootProcessDeal } from './inmobiliaria/pages/processDeal/RootProcessDeal.jsx';
+import { ProcessDeal } from './inmobiliaria/pages/processDeal/ProcessDeal.jsx';
+import { RootUser } from './inmobiliaria/pages/user/RootUser.jsx';
+import { User } from './inmobiliaria/pages/user/User.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './app.css'
 
@@ -33,27 +37,37 @@ const router = createBrowserRouter([
         path: '/home',
         element: <RootHome />,
         children:[
-          // {index:true, element: <Publication />},
           {index:true, element: <Home />},
-          // {path: 'detail/:id', element: <Detail />}
         ]
       }, 
-
 
       {
         path: '/liquidation',
         element: <RootLiquidation />,
         children:[
-          // {index:true, element: <Publication />},
           {index:true, element: <Liquidation />},
-          // {path: 'detail/:id', element: <Detail />}
+        ]
+      },
+
+      {
+        path:'/process-deal',
+        element:<RootProcessDeal/>,
+        children:[
+          {index:true,element:<ProcessDeal/>}
+        ]
+      },
+      {
+        path:"/user",
+        element:<User/>,
+        children:[
+          {index:true,element:<User/>}
         ]
       }
     ]
   }
 ],
 {
-  basename: '/app' // Establece el prefijo de las rutas
+  basename: '/app'
 }
 );
 
