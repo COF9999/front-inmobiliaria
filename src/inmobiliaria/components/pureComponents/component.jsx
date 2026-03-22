@@ -1,9 +1,12 @@
 import { ButtonAction} from "./buttons";
 import { ClosePopUp } from "../svg/Svg";
+import { memo } from "react";
 import "../../css/components.css"
 
 
-export function TableObjects({propertyColumns,subListPropertyColums,coverPropertyColums,list,subList,listActions,noValues}){
+export const TableObjects = memo(function  TableObjects({propertyColumns,subListPropertyColums,coverPropertyColums,list,subList,listActions,noValues}){
+
+  console.log("Tabla renderizada");
 
   return <table className="liquidation-table">
           <thead>
@@ -42,12 +45,9 @@ export function TableObjects({propertyColumns,subListPropertyColums,coverPropert
               <td colSpan="100%">No hay datos disponibles</td>
             </tr>
           )}
-</tbody>
-
-
-
+      </tbody>
         </table>
-}
+})
 
 export function SearchInput({value,onChange,onIconClick,refInput}){
     return(
@@ -128,9 +128,16 @@ export function WrapperUniqueFilter({ComponentA,ComponentB}){
   )
 }
 
-export function Overlay({nameHeader,content,onCancel}){
+export function Overlay({bgd,position,nameHeader,content,onCancel}){
+
+   const customOverlay = {
+    // Los valores deben ser strings y la propiedad usar camelCase
+    backgroundColor: bgd ? "rgba(0,0,0,0.5)" : "transparent",
+    alignItems: position 
+  };
+
   return(
-    <div className="overlay">
+    <div className="overlay" style={customOverlay}>
             <div className="content-overlay">
                 <div className="header-overlay">
                     <h3>{nameHeader}</h3>
@@ -141,10 +148,41 @@ export function Overlay({nameHeader,content,onCancel}){
                  <div className="box-close-overlay">
                         <ButtonAction
                             SvgComponent={ClosePopUp}
-                            action={()=> onCancel("")}
+                            action={()=> onCancel()}
                         />
                 </div>   
             </div>
         </div>
+  )
+}
+
+export function EditValues({valueInput,onChangeInput,keyParam,nameAction,doEdit}){
+
+  console.log(keyParam);
+
+  return(
+       <div className="edit-values">
+      {/* Primer div: Contiene Label e Input */}
+      <div className="field-group">
+        <label htmlFor="name-input">{keyParam}</label>
+        <input 
+          type="text" 
+          id="name-input" 
+          placeholder="Escribe el nuevo valor..." 
+          className="custom-input"
+          value={valueInput}
+          onChange={onChangeInput}
+        />
+      </div>
+
+      {/* Div hermano: Contiene el botón */}
+      <div className="action-group">
+          <ButtonAction
+              className="submit-btn"
+              children={nameAction}
+              action={doEdit}
+            />
+      </div>
+    </div>
   )
 }
