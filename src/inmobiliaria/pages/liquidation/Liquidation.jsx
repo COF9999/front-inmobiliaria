@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { FilterSvgLiquidation,RestoreTrashIcon,LiquidationSvgClose } from "../../components/svg/Svg.jsx";
 import { TableObjects,MenuToggle } from "../../components/pureComponents/component.jsx";
 import { ButtonAction } from "../../components/pureComponents/buttons.jsx";
@@ -8,56 +8,31 @@ import { convertStringDate } from "../../consults/date";
 import { formatCurrencyLocal } from "../../consults/numbers";
 import api from "../../apiAxios.js"
 import "../../css/liquidation.css"
+import {getDealsNotProccesed,closeSelectDeal} from "./services/callApiLiquidation.js"
 
-
-
-const getDealsNotProccesed = async ({objBody,setListOperate,setNoValues})=>{
-    try{
-        const response = await api.post("/deal/deals-not-proccesed",objBody)
-        if(response.status === 200){
-          const data = response.data;
-            if(data.length === 0){
-              setNoValues(true)
-            }else{
-              setNoValues(false)
-            }
-            setListOperate(data)
-        }else{
-            console.log("BAD RETURN OFF SERVER");
-        }
-    }catch(e){
-        console.log("Internal Server Error");
-        console.log(e);
-    }    
-};
-
-
-const closeSelectDeal= (deal)=>{
-  const executeConsult = async (deal)=>{
-
-      const requestBody = {
-        dealId: deal.id
-      }
-
-      console.log(requestBody);
-      
-
-      try{
-        const response = await api.post("/deal/liquidate-select-deal",requestBody)
-        if(response.status === 200){
-            alert("Liquidación completa")
-        }else{
-            console.log("BAD RETURN OFF SERVER");
-        }
-    }catch(e){
-        console.log("Internal Server Error");
-        console.log(e);
+const PROPERTY_COLUMS = ["id","ownerId","pipelineType"]
+const SUBLIST_PROPERTY_COLUMS = ["dealname", "amount","closedate"]
+const OPTIOSFILTERBYDAYS = [
+    { label: "", value: "" },
+    { label: "8", value: "8" },
+    { label: "15", value: "15" },
+    { label: "30", value: "30" },
+    { label: "31", value: "31" }
+];
+const LIST_ACTIONS = [
+    {
+      "svg":LiquidationSvgClose,
+      "event": (deal,self) => closeSelectDeal(deal) 
     }
-  }
+]
 
-  executeConsult(deal)
-  
-}
+const PAGE_ACTIONS = 
+     {
+      "svg": FilterSvgLiquidation,
+      "event": (state) => setIsActivePopUpFilter(state) 
+    }
+
+    
 
 
 function PopUpFilterAction({isActive,setIsActive}){
@@ -78,51 +53,54 @@ export const Liquidation = () => {
   const [listOperate,setListOperate] = useState([])
   const [componentFilter,setComponentFilter] = useState(false)
   const [valueResultComponentFilter,setValueResultComponentFilter] = useState("")
-  const subListPropertyColums = ["dealname", "amount","closedate"]
-  const propertyColumns = ["id","ownerId","pipelineType"]
   const [stateInfoFilter,setStateInfoFilter] = useState({})
   const [noValues,setNoValues] = useState(false)
   const [isActivePopUpFilter,setIsActivePopUpFilter] = useState(false)
-
- 
-  const optionsMenuTogge = [
-    { label: "", value: "" },
-    { label: "8", value: "8" },
-    { label: "15", value: "15" },
-    { label: "30", value: "30" },
-    { label: "31", value: "31" }
-  ];
-
-  const listActions = [
-    {
-      "svg":LiquidationSvgClose,
-      "event": (deal,self) => closeSelectDeal(deal) 
-    }
-  ]
-
-  const pageActions = 
-     {
-      "svg": FilterSvgLiquidation,
-      "event": (state) => setIsActivePopUpFilter(state) 
-    }
-
-  const resetFilter = {
-    "svg": RestoreTrashIcon,
-     "event": () => setStateFullFilter()
-  }  
   
+  const coverPropertyColumns = useCallback((item)=>(
+    PROPERTY_COLUMS.map((p)=>(
+      <td key={`cell-${item.id}-${p}`}>
+        {typeof item[p] === "boolean" ? (item[p] ? "Si" : "No") : item[p]}
+      </td>
+    ))
+  ),[])
+  
+  const renderSubList = useCallback((item) => (
+    <>
+      <td key={`sub-name-${item.id}`}>{item.properties["dealname"]}</td>
+      <td key={`sub-amount-${item.id}`}>{formatCurrencyLocal(item.properties["amount"])}</td>
+      <td key={`sub-date-${item.id}`}>{convertStringDate(item.properties["closedate"])}</td>
+    </> 
+  ),[])
+
+  const RESET_FILTER = useCallback(()=>(
+    {
+    "svg": RestoreTrashIcon,
+     "event": () => setStateInfoFilter({filter:"",value:""})
+    }
+  ),[])
+
 
   useEffect(()=>{
+  
+    if(stateInfoFilter.filter === "" || Object.keys(stateInfoFilter).length === 0){
+      if(stateInfoFilter.filter === ""){
+        setListOperate([])
+      }
+      return
+    }
+     
     const typeFilter = stateInfoFilter["filter"]
     const valueFilter = stateInfoFilter["value"]
 
-
-    if((!typeFilter?.trim()) && (!valueFilter?.trim())){
+     if(typeFilter==="" && valueFilter === ""){
       setListOperate([])
       return
     }
-
+    
     switch(typeFilter){
+      
+      
       case "by-days-month": 
           getDealsNotProccesed({
             objBody:{onlyDay:Number(valueFilter)},
@@ -141,29 +119,16 @@ export const Liquidation = () => {
           })          
       break
     }
-  },[JSON.stringify(stateInfoFilter)])
-
-
-  useEffect(()=>{ 
-    if(valueResultComponentFilter==""){
-      setListOperate([])
-    }
-  },[valueResultComponentFilter])
-
+  },[stateInfoFilter])
   
-
-  const setStateFullFilter = ()=>{
-      setValueResultComponentFilter("")
-      setStateInfoFilter("")
-  }
   
   return (
     <div className="container-primary-liquidation">
         <div className="container-primary-options">
           <div className="content-filter-svg-liquidation">
             <ButtonAction
-              SvgComponent={pageActions.svg}
-              action={()=> pageActions.event(!isActivePopUpFilter)}
+              SvgComponent={PAGE_ACTIONS.svg}
+              action={()=> PAGE_ACTIONS.event(!isActivePopUpFilter)}
             ></ButtonAction>
           </div>
           <div className="content-dinamic-filter-options">
@@ -178,7 +143,7 @@ export const Liquidation = () => {
                 }}
                 valueResultComponentFilter={valueResultComponentFilter}
                 setValueResultComponentFilter={value=> setValueResultComponentFilter(value)}
-                options={optionsMenuTogge}
+                options={OPTIOSFILTERBYDAYS}
                 open={componentFilter}
                 setOpen={(status)=> setComponentFilter(status)}
                 onSelect={info=> {
@@ -189,8 +154,8 @@ export const Liquidation = () => {
               
               />}
               ComponentB={<ButtonAction
-                   SvgComponent={resetFilter.svg}
-                   action={()=> resetFilter.event()}
+                   SvgComponent={RESET_FILTER().svg}
+                   action={()=> RESET_FILTER().event()}
               />
                         
               }
@@ -207,8 +172,8 @@ export const Liquidation = () => {
               />
             }
                ComponentB={<ButtonAction
-                   SvgComponent={resetFilter.svg}
-                   action={()=> resetFilter.event()}
+                   SvgComponent={RESET_FILTER.svg}
+                   action={()=> RESET_FILTER.event()}
                 />  
               }
             />
@@ -219,26 +184,11 @@ export const Liquidation = () => {
         <div className="container-body-deals">
            <TableObjects
               list={listOperate}
-              subListPropertyColums={subListPropertyColums}
-              propertyColumns={propertyColumns}
-             coverPropertyColums={(item) => {
-                  return propertyColumns.map((property) => {
-                    const value = item[property];
-                    return (
-                      <td key={`cell-${item.id}-${property}`}> {/* Key única por celda */}
-                        {typeof value === "boolean" ? (value ? "Si" : "No") : value}
-                      </td>
-                    );
-                  });
-              }}
-              listActions={listActions}
-              subList={(item)=> {
-                 return <>
-                        <td key={`sub-name-${item.id}`}>{item.properties["dealname"]}</td>
-                        <td key={`sub-amount-${item.id}`}>{formatCurrencyLocal(item.properties["amount"])}</td>
-                        <td key={`sub-date-${item.id}`}>{convertStringDate(item.properties["closedate"])}</td>
-                    </>
-              }}
+              propertyColumns={PROPERTY_COLUMS}
+              subListPropertyColums={SUBLIST_PROPERTY_COLUMS}
+              coverPropertyColums={coverPropertyColumns}
+              subList={renderSubList}
+              listActions={LIST_ACTIONS}
               noValues={noValues}
            />
         </div>

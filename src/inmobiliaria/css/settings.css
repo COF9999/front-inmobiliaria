@@ -1,0 +1,113 @@
+.settings-page {
+  /* background-color: #f8fafc; */
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, sans-serif;
+  padding: 40px 20px;
+  color: #1e293b;
+}
+
+.settings-mainContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Sidebar */
+.settings-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 40px;
+}
+
+.settings-sidebarTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-left: 12px;
+}
+
+.settings-navStack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settings-sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  padding: 16px 12px 8px 12px;
+}
+
+.settings-navItem {
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #475569;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-navActive {
+  background-color: #ffffff;
+  color: #4f46e5;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.settings-icon {
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Contenedor de Contenido */
+.settings-contentCanvas {
+  flex-grow: 1;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  padding: 32px;
+  min-height: 600px;
+}
+
+.settings-contentHeader {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+.settings-contentTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.settings-contentSubtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.settings-placeholder {
+  border: 2px dashed #e2e8f0;
+  border-radius: 12px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 14px;
+}
+.settings-dynamicArea{
+  height: 100%;
+}
