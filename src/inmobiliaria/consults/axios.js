@@ -28,12 +28,8 @@ export const getConsult = async(uri)=>{
 }
 
 export const postConsult = async(uri,body)=>{
-
     const response = await api.post(uri,body)
-
-    console.log(response);
     
-   
     if(response.status === 200){
         const data = response.data;
         console.log(data);

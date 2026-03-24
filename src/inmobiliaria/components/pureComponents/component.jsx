@@ -4,7 +4,7 @@ import { memo } from "react";
 import "../../css/components.css"
 
 
-export const TableObjects = memo(function  TableObjects({propertyColumns,subListPropertyColums,coverPropertyColums,list,subList,listActions,noValues}){
+export const TableObjects = memo(function  TableObjects({translateColums,coverPropertyColums,list,subList,listActions,noValues}){
 
   console.log("Tabla renderizada");
 
@@ -12,8 +12,7 @@ export const TableObjects = memo(function  TableObjects({propertyColumns,subList
           <thead>
             <tr>
               {/* Generamos encabezados dinámicos para las propiedades */}
-              {propertyColumns.map(col => <th key={`Property-colum--${col}`}>{col}</th>)}
-              {subListPropertyColums!=null ? subListPropertyColums.map(col => <th key={`sublist-Property-colum--${col}`}>{col}</th>): ""}
+              {Object.values(translateColums).map(col => <th key={`Translate-colum--${col}`}>{col}</th>)}
               {listActions.length!==0? <th>Acciones</th>:""}
             </tr>
           </thead>
@@ -29,14 +28,17 @@ export const TableObjects = memo(function  TableObjects({propertyColumns,subList
 
                 {/* Acciones */}
                 {listActions.length > 0 ? (
-                  listActions.map((action, index) => (
-                    <td key={`${item.id}-action-${index}`}>
+
+                  <td key={`${item.id}-action-user`}>
+                    {listActions.map((action, index) => (
                       <ButtonAction
                         SvgComponent={action.svg}
                         action={() => action.event(item,action)}
                       />
-                    </td>
-                  ))
+                    )
+                    )}                      
+                  </td>
+                 
                 ) : null}
               </tr>
             ))
@@ -137,7 +139,7 @@ export function Overlay({bgd,position,nameHeader,content,onCancel}){
   };
 
   return(
-    <div className="overlay" style={customOverlay}>
+    <div className="overlay animate-to-mount" style={customOverlay}>
             <div className="content-overlay">
                 <div className="header-overlay">
                     <h3>{nameHeader}</h3>

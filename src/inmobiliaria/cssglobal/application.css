@@ -79,8 +79,11 @@
 
 
 .father-div-content-aplication{
-    width: 90vw;
-    padding: 20px;
+  width: 90vw;
+  min-height: 90vh; 
+  padding: 20px;
+  box-sizing: border-box; 
+  position: relative; 
 }
 
 
@@ -89,18 +92,16 @@
     border-radius: 5px;
 }
 
-.div-nav-auth{
+.div-nav-auth {
     display: flex;
     align-items: center;
     margin-right: 5px;
     flex: 1;
-    
+    justify-content: flex-end;
+    gap: 15px;
 }
-
 .div-nav-profile{
-    width: 60%;
     text-align: right;
-    
 }
 
 .div-link-redirection{
@@ -114,7 +115,6 @@
 .div-close-session{
     display: flex;
     justify-content: flex-end;
-    flex: 1;
     padding-right: 30px;
 }
 

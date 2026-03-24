@@ -4,9 +4,7 @@ export const getDealsNotProccesed = async ({objBody,setListOperate,setNoValues})
     try{
         console.log("QUERER LANZAR CONSULTA");
         
-        const data = await postConsult("/deal/deals-not-proccesed",objBody)
-       
-        console.log(data);
+        const data = await postConsult("/deal/deals-not-proccesed",objBody) 
         
         if(data.length===0){
              setNoValues(true)

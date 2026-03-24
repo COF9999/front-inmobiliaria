@@ -78,60 +78,60 @@ export function Settings(){
     const messageDialog = getModal("MESSAGE")
      
     return (
-    <div className="settings-page">
+    <div className="settings-page view-animation">
         <div className="settings-mainContainer">
         
-        {/* Subcontenedor Izquierdo: Navegación Estática */}
-        <aside className="settings-sidebar">
-            <div className="settings-sidebarHeader">
-            <h3 className="settings-sidebarTitle">Configuración</h3>
-            </div>
+            {/* Subcontenedor Izquierdo: Navegación Estática */}
+            <aside className="settings-sidebar">
+                <div className="settings-sidebarHeader">
+                <h3 className="settings-sidebarTitle">Configuración</h3>
+                </div>
+                
+                <nav className="settings-navStack">
+                <div className="settings-sectionLabel">Cuenta</div>
+                {/* Combinación de clase base y clase activa */}
+                <div className={`settings-navItem ${isActiveFocusNavItem.id===1 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:1}))}>
+                    <i className="settings-icon">🌍</i> Variables Globales
+                </div>
+                <div className={`settings-navItem ${isActiveFocusNavItem.id===2 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:2}))}>
+                    <i className="settings-icon">🔒</i> Seguridad
+                </div>
+                <div className={`settings-navItem ${isActiveFocusNavItem.id===3 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:3}))}>
+                    <i className="settings-icon">🔔</i> Notificaciones
+                </div>
+                </nav>
+            </aside>
+
+            {/* Subcontenedor Derecho: Contenido Dinámico */}
+            <main className="settings-contentCanvas">
+                <header className="settings-contentHeader">
+                    <h2 className="settings-contentTitle">{headerContent.header}</h2>
+                    <p className="settings-contentSubtitle">{headerContent.subtitle}</p>
+                </header>
+
+                <section className="settings-dynamicArea">
             
-            <nav className="settings-navStack">
-            <div className="settings-sectionLabel">Cuenta</div>
-            {/* Combinación de clase base y clase activa */}
-            <div className={`settings-navItem ${isActiveFocusNavItem.id===1 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:1}))}>
-                <i className="settings-icon">🌍</i> Variables Globales
-            </div>
-            <div className={`settings-navItem ${isActiveFocusNavItem.id===2 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:2}))}>
-                <i className="settings-icon">🔒</i> Seguridad
-            </div>
-            <div className={`settings-navItem ${isActiveFocusNavItem.id===3 && isActiveFocusNavItem.typeClass}`} onClick={()=> setIsActiveFocusNavItem(prevState=>({...prevState,id:3}))}>
-                <i className="settings-icon">🔔</i> Notificaciones
-            </div>
-            </nav>
-        </aside>
 
-        {/* Subcontenedor Derecho: Contenido Dinámico */}
-        <main className="settings-contentCanvas">
-            <header className="settings-contentHeader">
-                <h2 className="settings-contentTitle">{headerContent.header}</h2>
-                <p className="settings-contentSubtitle">{headerContent.subtitle}</p>
-            </header>
+                {loading && <SpinnerLoadingData />}
 
-            <section className="settings-dynamicArea">
-         
-
-            {loading && <SpinnerLoadingData />}
-
-           
-            {currentView ? (
-                <div style={{ display: loading ? 'none' : 'block' }}>
-                    <currentView.Component 
-                        setLoading={setLoading}
-                        setHeaderContent={setHeaderContent}
-                        OpenPromise={OpenPromise}
-                    />
-                </div>
-            ) : (
-                <div className="settings-placeholder">
-                    <p>Selecciona una opción del menú para comenzar</p>
-                </div>
-            )}
-            </section>
-        </main>
-
-        {
+            
+                {currentView ? (
+                    <div style={{ display: loading ? 'none' : 'block' }}>
+                        <currentView.Component 
+                            setLoading={setLoading}
+                            setHeaderContent={setHeaderContent}
+                            OpenPromise={OpenPromise}
+                        />
+                    </div>
+                ) : (
+                    <div className="settings-placeholder">
+                        <p>Selecciona una opción del menú para comenzar</p>
+                    </div>
+                )}
+                </section>
+            </main>
+        </div>
+         {
          popUpGvariable.isActive?
          <PopUpGlobalVariable
             type={popUpGvariable.idModal}
@@ -150,7 +150,6 @@ export function Settings(){
            onCancel={()=> ClosePromise(messageDialog.fullInfo.id,null)}
             />
         }
-        </div>
     </div>
     )
 }
@@ -158,6 +157,7 @@ export function Settings(){
 
 function GlobalVariable({setHeaderContent,setLoading,OpenPromise}){
     const [listGlobalVariables,setListGlobalVariables] = useState([])
+    const TRANSLATE_COLUMS = useMemo(()=> {return {"key":"Clave","Valor":"Valor"}},[])
     const PROPERTY_COLUMS = useMemo(()=>["key","value"],[])
     const listActions = useMemo(()=>[
         {
@@ -228,8 +228,8 @@ function GlobalVariable({setHeaderContent,setLoading,OpenPromise}){
         <>
              <TableObjects
                 list={listGlobalVariables}
+                translateColums={TRANSLATE_COLUMS}
                 coverPropertyColums={coverPropertyColumns}
-                propertyColumns={PROPERTY_COLUMS}
                 listActions={listActions}
             />
         </>

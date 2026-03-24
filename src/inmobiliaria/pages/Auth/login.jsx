@@ -84,6 +84,9 @@ export const Login = () => {
         console.log("Ok");
         
         const nameUsername = response.data.username
+
+        console.log(nameUsername);
+        
         usernameContext(nameUsername)
         localStorage.setItem("username",nameUsername)
         login(true)

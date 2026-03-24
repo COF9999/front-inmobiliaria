@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import os from 'os';
 import dotenv from 'dotenv';
+import tailwindcss from '@tailwindcss/vite'
 // export default defineConfig({
 //   plugins: [react()],
 
@@ -44,7 +45,7 @@ const replacePlugin = (mode) => {
 
 
 export default defineConfig(({mode})=>({
-  plugins: [react(),replacePlugin(mode)],
+  plugins: [react(),replacePlugin(mode),tailwindcss()],
   server:{
     host: process.env.VITE_REACT_HOST || hostReact
   }

@@ -103,6 +103,7 @@ export function ProtectedRoute() {
     staleTime: 600000, // 10 min
   });
 
+  
   // 2. Lógica de UI derivada del ancho de pantalla (sin useEffects extra)
   const isMobile = screenWidth <= 1200;
   const [navHeaderBody, setNavHeaderBody] = useState(false);
@@ -127,7 +128,7 @@ export function ProtectedRoute() {
             <div className="div-nav-auth">
 
                 <div className="div-nav-profile">
-                  <Link to="/my-profile">@{authObj.username || username}</Link>
+                  <Link to="/my-profile">{username || authObj.username}</Link>
                 </div> 
 
                 <div className="div-close-session">   

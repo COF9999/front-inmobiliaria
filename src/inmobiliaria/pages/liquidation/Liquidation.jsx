@@ -10,8 +10,16 @@ import api from "../../apiAxios.js"
 import "../../css/liquidation.css"
 import {getDealsNotProccesed,closeSelectDeal} from "./services/callApiLiquidation.js"
 
-const PROPERTY_COLUMS = ["id","ownerId","pipelineType"]
+const PROPERTY_COLUMS = ["id","nameUser","pipelineType"]
 const SUBLIST_PROPERTY_COLUMS = ["dealname", "amount","closedate"]
+const COLUMN_TRANSLATIONS = {
+  id: "Id Negocio",
+  nameUser: "Nombre de Usuario",
+  pipelineType: "Tipo de Pipeline",
+  dealname: "Nombre del Trato",
+  amount: "Monto",
+  closedate: "Fecha de Cierre"
+};
 const OPTIOSFILTERBYDAYS = [
     { label: "", value: "" },
     { label: "8", value: "8" },
@@ -60,7 +68,10 @@ export const Liquidation = () => {
   const coverPropertyColumns = useCallback((item)=>(
     PROPERTY_COLUMS.map((p)=>(
       <td key={`cell-${item.id}-${p}`}>
-        {typeof item[p] === "boolean" ? (item[p] ? "Si" : "No") : item[p]}
+        {typeof item[p] === "boolean" 
+         ? (item[p] ? "Si" : "No") 
+         : item[p]
+         }
       </td>
     ))
   ),[])
@@ -120,10 +131,20 @@ export const Liquidation = () => {
       break
     }
   },[stateInfoFilter])
+
+  useEffect(()=>{
+    getDealsNotProccesed({
+            objBody:{onlyDay:30},
+            setListOperate: setListOperate ,
+            setNoValues: setNoValues
+          })
+    
+   setValueResultComponentFilter(30)
+  },[])
   
   
   return (
-    <div className="container-primary-liquidation">
+    <div className="container-primary-liquidation view-animation">
         <div className="container-primary-options">
           <div className="content-filter-svg-liquidation">
             <ButtonAction
@@ -184,8 +205,7 @@ export const Liquidation = () => {
         <div className="container-body-deals">
            <TableObjects
               list={listOperate}
-              propertyColumns={PROPERTY_COLUMS}
-              subListPropertyColums={SUBLIST_PROPERTY_COLUMS}
+              translateColums={COLUMN_TRANSLATIONS}
               coverPropertyColums={coverPropertyColumns}
               subList={renderSubList}
               listActions={LIST_ACTIONS}

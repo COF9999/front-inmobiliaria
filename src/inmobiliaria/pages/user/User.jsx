@@ -7,6 +7,14 @@ import { CreateUserJsx } from "./subModals/userEdit"
 import { ChangeRol } from "./subModals/role"
 import "../../css/user.css"
 
+const TRANSLATE_COLUMS = {
+  hubId: "ID de Hub",
+  isActive: "Activo",
+  name: "Nombre",
+  identification: "Identificación",
+  roles:"Roles",
+  
+};
 const PROPERTY_COLUMS = ["hubId","isActive","name","identification"]
 const FULL_ROLE_LIST = ["ROLE_ADMIN","ROLE_USER"]
 const SUBLIST_PROPERTY_COLUMS = ["roles"]
@@ -131,11 +139,10 @@ export const User = () => {
   },[])
     
   return (
-    <div className="container-primary-user">
+    <div className="container-primary-user view-animation">
         <TableObjects
             list={listUser}
-            propertyColumns={PROPERTY_COLUMS}
-            subListPropertyColums={SUBLIST_PROPERTY_COLUMS}
+            translateColums={TRANSLATE_COLUMS}
             coverPropertyColums={coverPropertyColumns}
             subList={subList}
             listActions={listActions}

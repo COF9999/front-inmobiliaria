@@ -4,6 +4,14 @@ import { TableObjects } from "../../components/pureComponents/component"
 import { convertStringDate } from "../../consults/date";
 import { formatCurrencyLocal } from "../../consults/numbers";
 
+const TRANSLATE_COLUMS ={
+    id: "ID",
+    pipelineType: "Tipo de Pipeline",
+    userLiquidationId: "ID de userLiquidation",
+    amount: "Valor",
+    closedAt: "Fecha de Cierre",
+    processedAt: "Fecha de Procesamiento",
+}
 const PROPERTY_COLUMS = ["id","pipelineType","userLiquidationId","amount","closedAt","processedAt"]
 
 export const ProcessDeal = () => {
@@ -36,11 +44,11 @@ export const ProcessDeal = () => {
     },[])
 
     return (
-      <div className="container-primary-processDeal">
+      <div className="container-primary-processDeal view-animation">
           <TableObjects
+              translateColums={TRANSLATE_COLUMS}
               list={listProcessDeal}
               coverPropertyColums={coverPropertyColumns}
-              propertyColumns={PROPERTY_COLUMS}
               listActions={listActions}
           />
       </div>
