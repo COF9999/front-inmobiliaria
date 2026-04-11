@@ -29,7 +29,7 @@ function NormalSideBar({valueNavHeader}){
                        <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
                        <Link to="/user" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Usuarios</Link> 
                        <Link to="/liquidation" className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Liquidaciones</Link>
-                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios cerrados</Link>
+                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios Cerrados</Link>
                        <Link to="/settings" className={selectOptionNav===5?styleSelectOption:""} onClick={()=> changeSelectValueOption(5)}>Configuración</Link>  
          </nav>
     )
@@ -71,7 +71,19 @@ function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
                     </div>
 
                     <div className="div-link-redirection">
-                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Liquidation</Link>
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Usuarios</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Liquidaciones</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Negocios Cerrados</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Configuración</Link>
                     </div>
               </div>
           )

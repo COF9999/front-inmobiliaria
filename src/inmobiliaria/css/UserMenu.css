@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+
 .user-menu {
   position: relative;
   display: inline-block;
@@ -25,14 +28,14 @@
   min-width: 180px;
 
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 /* nombre usuario */
 .user-info {
   padding: 8px;
-  font-weight: bold;
-  font-size: 14px;
   border-bottom: 1px solid #eee;
   margin-bottom: 6px; 
   text-align: center
@@ -44,12 +47,11 @@
   background: none;
   border: none;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 8px;
+  
 }
 
 .logout-btn:hover {
