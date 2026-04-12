@@ -17,9 +17,9 @@ function NormalSideBar({valueNavHeader}){
     const [selectOptionNav,setSelectOptionNav] = useState()
     const styleSelectOption = "sweet-grey"
 
-    if(valueNavHeader==false){
-        return
-    }
+    // if(valueNavHeader==false){
+    //     return
+    // }
 
     const changeSelectValueOption = (key)=> setSelectOptionNav(key)
     
@@ -37,10 +37,10 @@ function NormalSideBar({valueNavHeader}){
  
 function IconMenuResize({valueMenuOpen, setNavHeaderBody, navHeaderBody}){
 
-    if(valueMenuOpen===false){
-        return null
-    }
-    //sigue si es valueMenuOpen = true
+    // if(valueMenuOpen===false){
+    //     return null
+    // }
+    
     const changeToogleMenuState = ()=>{
         setNavHeaderBody(!navHeaderBody)// navHeaderBody se vuelve true para mostrar menu
     }
@@ -130,12 +130,12 @@ export function ProtectedRoute() {
             <div className="div-nav-application-cue">
               <img src={logoHabitar} alt="logo" />
             </div>
-          
-            <IconMenuResize
-              valueMenuOpen={isMobile}
-              navHeaderBody={navHeaderBody}
-              setNavHeaderBody={setNavHeaderBody}
-            />
+
+              <IconMenuResize
+                // valueMenuOpen={isMobile}
+                navHeaderBody={navHeaderBody}
+                setNavHeaderBody={setNavHeaderBody}
+              />
 
             <div className="div-nav-auth">
 
@@ -156,7 +156,8 @@ export function ProtectedRoute() {
 
         <div className="container-content-app">
             {/* Usamos !isMobile para decidir qué sidebar mostrar */}
-            <NormalSideBar valueNavHeader={!isMobile} />
+            {/* <NormalSideBar valueNavHeader={!isMobile} /> */}
+            <NormalSideBar/>
             
             <HamburguerSideBar
               setNavHeaderBody={setNavHeaderBody}
