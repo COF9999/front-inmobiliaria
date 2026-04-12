@@ -1,4 +1,4 @@
-.menu-icon{
+.nav-icon-hamburguer{
     display: none; 
     justify-content: center;
     align-items: center;
@@ -29,16 +29,16 @@
     color: black;
 }
 
-@media (max-width: 1390px) { 
+@media (max-width: 1200px) { 
 
-    .menu-icon{
+    .nav-icon-hamburguer{
 
         display: flex;
         font-size: 25px;
         color: black;
         align-items: center;
-        justify-content: center;
-        margin-right: auto;
+        justify-content:flex-end;
+        /* margin-right: auto; */
         
         
     }
