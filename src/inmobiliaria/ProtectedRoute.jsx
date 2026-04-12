@@ -17,19 +17,19 @@ function NormalSideBar({valueNavHeader}){
     const [selectOptionNav,setSelectOptionNav] = useState()
     const styleSelectOption = "sweet-grey"
 
-    if(valueNavHeader==false){
-        return
-    }
+    // if(valueNavHeader==false){
+    //     return
+    // }
 
     const changeSelectValueOption = (key)=> setSelectOptionNav(key)
     
  
     return(
-        <nav className={`nav-options-pages`}>
+        <nav className={`sidebar`}>
                        <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
                        <Link to="/user" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Usuarios</Link> 
                        <Link to="/liquidation" className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Liquidaciones</Link>
-                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios cerrados</Link>
+                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios Cerrados</Link>
                        <Link to="/settings" className={selectOptionNav===5?styleSelectOption:""} onClick={()=> changeSelectValueOption(5)}>Configuración</Link>  
          </nav>
     )
@@ -37,23 +37,23 @@ function NormalSideBar({valueNavHeader}){
  
 function IconMenuResize({valueMenuOpen, setNavHeaderBody, navHeaderBody}){
 
-    if(valueMenuOpen===false){
-        return null
-    }
-    //sigue si es valueMenuOpen = true
+    // if(valueMenuOpen===false){
+    //     return null
+    // }
+    
     const changeToogleMenuState = ()=>{
         setNavHeaderBody(!navHeaderBody)// navHeaderBody se vuelve true para mostrar menu
     }
 
     return(
-        <div className="menu-icon" onClick={changeToogleMenuState}>
+        <div className="nav-icon-hamburguer" onClick={changeToogleMenuState}>
             &#9776;
         </div>
     )
 }
 
 
-function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
+function HamburguerMenu ({navHeaderBody,setNavHeaderBody}){
 
     if(navHeaderBody===false){
         return
@@ -71,7 +71,19 @@ function HamburguerSideBar ({navHeaderBody,setNavHeaderBody}){
                     </div>
 
                     <div className="div-link-redirection">
-                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Liquidation</Link>
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Usuarios</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Liquidaciones</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Negocios Cerrados</Link>
+                    </div>
+
+                    <div className="div-link-redirection">
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Configuración</Link>
                     </div>
               </div>
           )
@@ -114,48 +126,58 @@ export function ProtectedRoute() {
 
   return (
     <div className="container-application">
-        <header className="container-nav-application">
-            <div className="div-nav-application-cue">
-              <img src={logoHabitar} alt="logo" />
-            </div>
-          
-            <IconMenuResize
-              valueMenuOpen={isMobile}
-              navHeaderBody={navHeaderBody}
-              setNavHeaderBody={setNavHeaderBody}
-            />
 
-            <div className="div-nav-auth">
+        {/* SIDEBAR (siempre visible a la izquierda) */}
+        <NormalSideBar />
 
-                <div className="div-nav-profile">
-                  <Link to="/my-profile">{username || authObj.username}</Link>
-                </div> 
+        {/* BLOQUE DERECHO (navbar + contenido) */}
+        <div className="right-area">
 
-                <div className="div-close-session">   
-                    <UserMenu 
-                      logout={logout}
-                      navigate={navigate}
-                      user={{ name: authObj.username || username }}
+              <header className="container-navbar">
+                  <div className="nav-logo">
+                    <img src={logoHabitar} alt="logo" />
+                  </div>
+
+                    <IconMenuResize
+                      // valueMenuOpen={isMobile}
+                      navHeaderBody={navHeaderBody}
+                      setNavHeaderBody={setNavHeaderBody}
                     />
-                </div>
-                
-            </div>
-        </header>
 
-        <div className="container-content-app">
-            {/* Usamos !isMobile para decidir qué sidebar mostrar */}
-            <NormalSideBar valueNavHeader={!isMobile} />
-            
-            <HamburguerSideBar
-              setNavHeaderBody={setNavHeaderBody}
-              navHeaderBody={navHeaderBody}
-            />
+                  <div className="nav-auth">
 
-            <main className="father-div-content-aplication">
-              {/* Pasamos los datos del usuario a todas las rutas hijas */}
-              <Outlet context={authObj} />
-            </main>
-        </div>
+                      <div className="div-nav-profile">
+                        <Link to="/my-profile">{username || authObj.username}</Link>
+                      </div> 
+
+                      <div className="div-close-session">   
+                          <UserMenu 
+                            logout={logout}
+                            navigate={navigate}
+                            user={{ name: authObj.username || username }}
+                          />
+                      </div>
+
+                  </div>
+              </header>
+        
+
+              <div className="container-content-app">
+                  {/* Usamos !isMobile para decidir qué sidebar mostrar */}
+                  {/* <NormalSideBar valueNavHeader={!isMobile} /> */}
+                  {/* <NormalSideBar/> */}
+                  
+                  <HamburguerMenu
+                    setNavHeaderBody={setNavHeaderBody}
+                    navHeaderBody={navHeaderBody}
+                  />
+
+                  <main className="father-div-content-aplication">
+                    {/* Pasamos los datos del usuario a todas las rutas hijas */}
+                    <Outlet context={authObj} />
+                  </main>
+              </div>
+         </div>  
     </div>
   );
 }
