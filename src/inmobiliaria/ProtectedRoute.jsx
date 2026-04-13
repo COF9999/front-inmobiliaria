@@ -38,7 +38,7 @@ function NormalSideBar({ valueNavHeader }) {
     const getClassName = ({ isActive }) => isActive ? styleSelectOption : "";
 
     return (
-        <nav className="nav-options-pages">
+        <nav className="sidebar">
             <NavLink to="/home" className={getClassName}>Home</NavLink>
             <NavLink to="/user" className={getClassName}>Usuarios</NavLink>
             <NavLink to="/liquidation" className={getClassName}>Liquidaciones</NavLink>
