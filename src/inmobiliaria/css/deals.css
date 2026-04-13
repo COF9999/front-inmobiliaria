@@ -1,0 +1,11 @@
+.container-primary-deals{
+    min-height: 90vh;
+}
+
+.deals-main-container{
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}

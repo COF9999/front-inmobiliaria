@@ -1,6 +1,6 @@
 import { Outlet} from "react-router-dom";
 
 
-export function RootProcessDeal(){
+export function RootPreliquidateDeal(){
     return <Outlet></Outlet>
 }

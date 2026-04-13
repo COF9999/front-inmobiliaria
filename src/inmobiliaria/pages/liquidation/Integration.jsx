@@ -1,17 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from "react"
-import { FilterSvgLiquidation,RestoreTrashIcon,LiquidationSvgClose } from "../../components/svg/Svg.jsx";
+import { useCallback, useEffect, useState } from "react"
+import { FilterSvgLiquidation,RestoreTrashIcon, ButterflyNet } from "../../components/svg/Svg.jsx";
 import { TableObjects,MenuToggle } from "../../components/pureComponents/component.jsx";
 import { ButtonAction } from "../../components/pureComponents/buttons.jsx";
 import { RangeCalendar } from "../../components/externalComponents/Calendar.jsx";
 import { WrapperUniqueFilter } from "../../components/pureComponents/component.jsx";
-import { convertStringDate } from "../../consults/date";
-import { formatCurrencyLocal } from "../../consults/numbers";
-import api from "../../apiAxios.js"
-import "../../css/liquidation.css"
-import {getDealsNotProccesed,closeSelectDeal} from "./services/callApiLiquidation.js"
+import { convertStringDate } from "../../consults/date.js";
+import { formatCurrencyLocal } from "../../consults/numbers.js";
+import {getDealsNotRegister, registerDeal} from "./services/callApiLiquidation.js"
+import "../../css/integration.css"
 
 const PROPERTY_COLUMS = ["id","nameUser","pipelineType"]
-const SUBLIST_PROPERTY_COLUMS = ["dealname", "amount","closedate"]
 const COLUMN_TRANSLATIONS = {
   id: "Id Negocio",
   nameUser: "Nombre de Usuario",
@@ -29,8 +27,8 @@ const OPTIOSFILTERBYDAYS = [
 ];
 const LIST_ACTIONS = [
     {
-      "svg":LiquidationSvgClose,
-      "event": (deal,self) => closeSelectDeal(deal) 
+      "svg":ButterflyNet,
+      "event": (deal,self) => registerDeal(deal) 
     }
 ]
 
@@ -57,7 +55,7 @@ function PopUpFilterAction({isActive,setIsActive}){
 }
 
 
-export const Liquidation = () => {
+export const Integration = () => {
   const [listOperate,setListOperate] = useState([])
   const [componentFilter,setComponentFilter] = useState(false)
   const [valueResultComponentFilter,setValueResultComponentFilter] = useState("")
@@ -113,14 +111,14 @@ export const Liquidation = () => {
       
       
       case "by-days-month": 
-          getDealsNotProccesed({
+          getDealsNotRegister({
             objBody:{onlyDay:Number(valueFilter)},
             setListOperate: setListOperate ,
             setNoValues: setNoValues
           })          
       break
       case "between-days-month": 
-          getDealsNotProccesed({
+          getDealsNotRegister({
               objBody:{
                 dateOne: valueFilter.dateOne,                  
                 dateSecond: valueFilter.dateSecond,              
@@ -133,7 +131,7 @@ export const Liquidation = () => {
   },[stateInfoFilter])
 
   useEffect(()=>{
-    getDealsNotProccesed({
+    getDealsNotRegister({
             objBody:{onlyDay:30},
             setListOperate: setListOperate ,
             setNoValues: setNoValues

@@ -14,8 +14,8 @@ export const verifySession = async ()=>{
 }
 
 
-export const getConsult = async(uri)=>{
-    const response = await api.get(uri)
+export const getConsult = async(uri,options={})=>{
+    const response = await api.get(uri,options)
 
     if(response.status == 200){
         const data = response.data; 

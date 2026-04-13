@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthProvider";
 import { verifySession } from "./consults/axios"; 
 import { useQuery } from '@tanstack/react-query';
 import { UserMenu } from "./components/pureComponents/UserMenu";
+import { NavLink, useLocation } from 'react-router-dom';
 import "./cssglobal/application.css"
 import "./cssglobal/resize.css"
 
@@ -12,27 +13,62 @@ import "./cssglobal/resize.css"
 import logoHabitar from "../assets/habitarr.png"
 
 
-function NormalSideBar({valueNavHeader}){
+function NormalSideBar({ valueNavHeader }) {
+    const location = useLocation();
+    const styleSelectOption = "sweet-grey";
 
-    const [selectOptionNav,setSelectOptionNav] = useState()
-    const styleSelectOption = "sweet-grey"
+    // Estado para expandir el submenú de Negocios
+    // Se inicializa en true si ya estamos en una ruta de /deals
+    const [isDealsOpen, setIsDealsOpen] = useState(location.pathname.includes('/deals'));
 
-    // if(valueNavHeader==false){
-    //     return
-    // }
 
-    const changeSelectValueOption = (key)=> setSelectOptionNav(key)
-    
- 
-    return(
-        <nav className={`sidebar`}>
-                       <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
-                       <Link to="/user" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Usuarios</Link> 
-                       <Link to="/liquidation" className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Liquidaciones</Link>
-                       <Link to="/process-deal" className={selectOptionNav===4?styleSelectOption:""} onClick={()=> changeSelectValueOption(4)}>Negocios Cerrados</Link>
-                       <Link to="/settings" className={selectOptionNav===5?styleSelectOption:""} onClick={()=> changeSelectValueOption(5)}>Configuración</Link>  
-         </nav>
-    )
+     useEffect(() => {
+        if (location.pathname.includes('/deals')) {
+            setIsDealsOpen(true);
+        } else {
+            setIsDealsOpen(false);
+        }
+    }, [location.pathname]);
+
+    if (valueNavHeader === false) {
+        return null;
+    }
+
+    // Función auxiliar para aplicar tu clase de estilo si la ruta está activa
+    const getClassName = ({ isActive }) => isActive ? styleSelectOption : "";
+
+    return (
+        <nav className="nav-options-pages">
+            <NavLink to="/home" className={getClassName}>Home</NavLink>
+            <NavLink to="/user" className={getClassName}>Usuarios</NavLink>
+            <NavLink to="/liquidation" className={getClassName}>Liquidaciones</NavLink>
+
+            {/* Sección Expandible: Negocios */}
+            <div className="nav-group-container">
+                <NavLink 
+                    to="/deals" 
+                    className={`nav-item-parent ${getClassName}`}
+                    onClick={() => setIsDealsOpen(true)} // Forzamos la apertura al hacer click
+                >
+                     <span>Negocios</span>
+                </NavLink>    
+                
+                {isDealsOpen && (
+                    <div className="nav-sub-options" style={{ paddingLeft: '15px', display: 'flex', flexDirection: 'column' }}>
+                        <NavLink to="/deals/funnel-sale" className={getClassName}>
+                           <span>Ventas</span>
+                        </NavLink>
+                        <NavLink to="/deals/funnel-rent" className={getClassName}>
+                             <span>Rentas</span>
+                        </NavLink>
+                    </div>
+                )}
+            </div>
+
+            <NavLink to="/preliquidate" className={getClassName}>Registros</NavLink>
+            <NavLink to="/settings" className={getClassName}>Configuración</NavLink>
+        </nav>
+    );
 }
  
 function IconMenuResize({valueMenuOpen, setNavHeaderBody, navHeaderBody}){
