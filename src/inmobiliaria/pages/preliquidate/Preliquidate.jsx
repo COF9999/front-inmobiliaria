@@ -3,28 +3,37 @@ import { getConsult } from "../../consults/axios"
 import { TableObjects } from "../../components/pureComponents/component"
 import { convertStringDate } from "../../consults/date";
 import { formatCurrencyLocal } from "../../consults/numbers";
+import { LiquidationSvg } from "../../components/svg/Svg";
+import { actionDeal } from "./services/callApiPreliquidate";
 
 const TRANSLATE_COLUMS ={
-    id: "ID",
-    pipelineType: "Tipo de Pipeline",
-    userLiquidationId: "ID de userLiquidation",
+    dealUserId: "ID",
+    nameUser: "Agente",
+    pipelineType: "Tipo de negocio",
     amount: "Valor",
     closedAt: "Fecha de Cierre",
-    processedAt: "Fecha de Procesamiento",
+   // processedAt: "Fecha de Procesamiento",
 }
-const PROPERTY_COLUMS = ["id","pipelineType","userLiquidationId","amount","closedAt","processedAt"]
+const PROPERTY_COLUMS = ["dealUserId","nameUser","pipelineType","amount","closedAt"]
 
-export const ProcessDeal = () => {
+const LIST_ACTIONS = [
+    {
+      "svg":LiquidationSvg,
+      "event": (deal,self) => actionDeal(deal) 
+    }
+]
+
+export const Preliquidate = () => {
  
-    const [listProcessDeal,setListProcessDeal] = useState([])
+    const [listPreliquidateDeal,setListPreliquidateDeal] = useState([])
     const coverPropertyColumns = useCallback((item)=>(
         <>
-            <td>{item["id"]}</td>
+            <td>{item["dealUserId"]}</td>
+            <td>{item["nameUser"] || "-"}</td>
             <td>{item["pipelineType"] || "-"}</td>
-            <td>{item["userLiquidationId"] || "-"}</td>
             <td>{formatCurrencyLocal(item["amount"]) || "-"}</td> 
             <td>{convertStringDate(item["closedAt"]) || "-"}</td>
-            <td>{convertStringDate(item["processedAt"]) || "-"}</td>
+        
         </>
     ),[])
 
@@ -32,9 +41,15 @@ export const ProcessDeal = () => {
   
     useEffect(()=>{
       const consult = async ()=>{
+              const options = {
+                params: {
+                    s: 'OPEN' 
+                }
+              }
               try {
-                  const response = await getConsult("/process-deal/list");                 
-                  setListProcessDeal(response)
+                  const response = await getConsult("/deal-register/",options); 
+                  console.log(response);
+                  setListPreliquidateDeal(response)
               } catch (error) {         
                   console.error("Error en la consulta:", error);
               } 
@@ -47,9 +62,9 @@ export const ProcessDeal = () => {
       <div className="container-primary-processDeal view-animation">
           <TableObjects
               translateColums={TRANSLATE_COLUMS}
-              list={listProcessDeal}
+              list={listPreliquidateDeal}
               coverPropertyColums={coverPropertyColumns}
-              listActions={listActions}
+              listActions={LIST_ACTIONS}
           />
       </div>
     )

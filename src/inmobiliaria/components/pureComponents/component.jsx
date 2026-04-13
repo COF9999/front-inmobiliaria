@@ -1,14 +1,70 @@
 import { ButtonAction} from "./buttons";
 import { ClosePopUp } from "../svg/Svg";
 import { memo } from "react";
+import React from 'react';
+import { MoreHorizontal} from 'lucide-react';
 import "../../css/components.css"
 
+
+export const ProfessionalCard = ({ dataBlock1, dataBlock2, actions }) => {
+  return (
+    <div className="w-[80%] h-[200px] bg-white rounded-2xl shadow-md border border-slate-200 flex overflow-hidden">
+        {/* COLUMNA 1: Estructura vertical (H2 y H3) */}
+        <div className="w-1/3 flex flex-col border-r border-slate-100">
+          <div className="flex-1 flex items-center justify-center p-6 bg-slate-50/50">
+            <h2 className="text-2xl font-extrabold text-slate-800 text-center uppercase tracking-tight">
+              {dataBlock1.title}
+            </h2>
+          </div>
+          <div className="flex-1 flex items-center justify-center p-6 border-t border-slate-100">
+            <h3 className="text-lg font-medium text-slate-500 text-center leading-relaxed">
+              {dataBlock1.subtitle}
+            </h3>
+          </div>
+        </div>
+
+        {/* COLUMNA 2: Grid de elementos (5 u 8) */}
+        <div className="flex-1 p-8 overflow-y-auto">
+          <div className="grid grid-cols-2 gap-4 h-full content-center">
+            {dataBlock2.items.map((item, index) => (
+              <div 
+                key={index}
+                className="flex items-center justify-center p-4 bg-white border border-slate-200 rounded-xl shadow-sm hover:border-indigo-400 hover:text-indigo-600 transition-all cursor-default font-medium text-slate-600"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMNA 3: Panel de Acciones (Estrategia de bloque) */}
+        <div className="w-[80px] bg-slate-900 flex flex-col justify-center items-center py-6 gap-6">
+          {actions.map((action, index) => (
+            <button
+              key={index}
+              onClick={action.onClick}
+              className="p-3 rounded-xl bg-slate-800 text-slate-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 group"
+              title={action.label}
+            >
+              {action.icon}
+            </button>
+          ))}
+          <div className="mt-auto">
+            <button className="text-slate-500 hover:text-white">
+              <MoreHorizontal size={24} />
+            </button>
+          </div>
+        </div>
+
+      </div>
+  );
+};
 
 export const TableObjects = memo(function  TableObjects({translateColums,coverPropertyColums,list,subList,listActions,noValues}){
 
   console.log("Tabla renderizada");
 
-  return <table className="liquidation-table">
+  return <table className="table-result">
           <thead>
             <tr>
               {/* Generamos encabezados dinámicos para las propiedades */}

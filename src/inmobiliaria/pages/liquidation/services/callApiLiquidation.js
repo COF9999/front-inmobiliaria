@@ -1,10 +1,10 @@
 import { getConsult, postConsult } from "../../../consults/axios"
 
-export const getDealsNotProccesed = async ({objBody,setListOperate,setNoValues})=>{
+export const getDealsNotRegister = async ({objBody,setListOperate,setNoValues})=>{
     try{
         console.log("QUERER LANZAR CONSULTA");
         
-        const data = await postConsult("/deal/deals-not-proccesed",objBody) 
+        const data = await postConsult("/deal/deals-not-register",objBody) 
         
         if(data.length===0){
              setNoValues(true)
@@ -19,21 +19,26 @@ export const getDealsNotProccesed = async ({objBody,setListOperate,setNoValues})
     }    
 };
 
-
-export const closeSelectDeal= (deal)=>{
+export const registerDeal= (deal)=>{
   const executeConsult = async (deal)=>{
 
       const requestBody = {
-        dealId: deal.id
+        dealId: deal.id,
+        typeMethod:"",
+        hubspotEnum:deal.pipelineType.replaceAll(" ", "").toUpperCase(),
+        statesObjects:'OPEN'
       }
 
+      
       console.log(requestBody);
       
-
       try{
-        const response = await postConsult("/deal/liquidate-select-deal",requestBody)
-        if(response.status === 200){
-            alert("Liquidación completa")
+        const response = await postConsult("/deal-register/create",requestBody)
+     
+        console.log(response.message === "ok");
+        
+        if(response.message === "ok"){
+            alert("Deal registrado")
         }else{
             console.log("BAD RETURN OFF SERVER");
         }
