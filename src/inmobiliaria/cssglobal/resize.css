@@ -1,9 +1,9 @@
 .nav-icon-hamburguer{
     display: none; 
-    justify-content: center;
     align-items: center;
     cursor: pointer;
     font-size: 25px;
+    color: black;
     
 }
 
@@ -32,15 +32,8 @@
 @media (max-width: 1200px) { 
 
     .nav-icon-hamburguer{
-
         display: flex;
-        font-size: 25px;
-        color: black;
-        align-items: center;
-        justify-content:flex-end;
-        /* margin-right: auto; */
-        
-        
+        margin-right: auto;
     }
 }
 

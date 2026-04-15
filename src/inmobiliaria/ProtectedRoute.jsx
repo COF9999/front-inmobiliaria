@@ -9,7 +9,8 @@ import "./cssglobal/application.css"
 import "./cssglobal/resize.css"
 
 
-import logoHabitar from "../assets/habitarr.png"
+import logo_Habitar_Navbar from "../assets/LogohabitarNavbar.png"
+import Logo_Habitar_Sidebar from "../assets/LogoHabitarSidebar.png"
 
 
 function NormalSideBar({valueNavHeader}){
@@ -25,7 +26,12 @@ function NormalSideBar({valueNavHeader}){
     
  
     return(
+ 
         <nav className={`sidebar`}>
+                       <div className="logo-sidebar">
+                          <img src={Logo_Habitar_Sidebar} alt="logo" />
+                       </div>
+                      
                        <Link to="/home" className={selectOptionNav===1?styleSelectOption:""} onClick={()=> changeSelectValueOption(1)}>Home</Link>
                        <Link to="/user" className={selectOptionNav===2?styleSelectOption:""} onClick={()=> changeSelectValueOption(2)}>Usuarios</Link> 
                        <Link to="/liquidation" className={selectOptionNav===3?styleSelectOption:""} onClick={()=> changeSelectValueOption(3)}>Liquidaciones</Link>
@@ -129,13 +135,12 @@ export function ProtectedRoute() {
 
         {/* SIDEBAR (siempre visible a la izquierda) */}
         <NormalSideBar />
-
         {/* BLOQUE DERECHO (navbar + contenido) */}
         <div className="right-area">
 
               <header className="container-navbar">
                   <div className="nav-logo">
-                    <img src={logoHabitar} alt="logo" />
+                    <img src={logo_Habitar_Navbar} alt="logo" />
                   </div>
 
                     <IconMenuResize
