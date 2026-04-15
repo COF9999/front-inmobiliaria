@@ -44,8 +44,9 @@ function NormalSideBar({ valueNavHeader }) {
                           <img src={Logo_Habitar_Sidebar} alt="logo" />
              </div>
             <NavLink to="/home" className={getClassName}>Home</NavLink>
-            <NavLink to="/user" className={getClassName}>Usuarios</NavLink>
-            <NavLink to="/liquidation" className={getClassName}>Liquidaciones</NavLink>
+            
+            <NavLink to="/integration" className={getClassName}>HubSpot</NavLink>
+            <NavLink to="/preliquidate" className={getClassName}>Registros</NavLink>
 
             {/* Sección Expandible: Negocios */}
             <div className="nav-group-container">
@@ -68,8 +69,7 @@ function NormalSideBar({ valueNavHeader }) {
                     </div>
                 )}
             </div>
-
-            <NavLink to="/preliquidate" className={getClassName}>Registros</NavLink>
+            <NavLink to="/user" className={getClassName}>Usuarios</NavLink>
             <NavLink to="/settings" className={getClassName}>Configuración</NavLink>
         </nav>
     );
@@ -87,7 +87,9 @@ function IconMenuResize({valueMenuOpen, setNavHeaderBody, navHeaderBody}){
 
     return(
         <div className="nav-icon-hamburguer" onClick={changeToogleMenuState}>
-            &#9776;
+            <div>
+               &#9776;
+            </div>
         </div>
     )
 }

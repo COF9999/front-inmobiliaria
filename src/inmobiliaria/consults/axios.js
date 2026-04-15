@@ -41,3 +41,18 @@ export const postConsult = async(uri,body)=>{
         throw new Error(`**********ERROR AL HACER LA CONSULTA A ${uri}`);
     } 
 }
+
+export const postConsultParams = async(uri,options)=>{
+    const response = await api.post(uri,options)
+    
+    if(response.status === 200){
+        const data = response.data;
+        console.log(data);
+        
+        return data
+    }else{
+        console.log(`**********ERROR AL HACER LA CONSULTA A ${uri}`);
+        
+        throw new Error(`**********ERROR AL HACER LA CONSULTA A ${uri}`);
+    } 
+}

@@ -90,7 +90,7 @@ export const Login = () => {
         usernameContext(nameUsername)
         localStorage.setItem("username",nameUsername)
         login(true)
-        navigate('/liquidation'); // Redirige al usuario a la página de publicaciones
+        navigate('/integration'); // Redirige al usuario a la página de publicaciones
       } else {
         // Si hay un error en el servidor, muestra un mensaje de error
         alert('Error al iniciar sesión');
