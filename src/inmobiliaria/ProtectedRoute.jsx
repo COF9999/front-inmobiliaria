@@ -10,7 +10,8 @@ import "./cssglobal/application.css"
 import "./cssglobal/resize.css"
 
 
-import logoHabitar from "../assets/habitarr.png"
+import logo_Habitar_Navbar from "../assets/LogohabitarNavbar.png"
+import Logo_Habitar_Sidebar from "../assets/LogoHabitarSidebar.png"
 
 
 function NormalSideBar({ valueNavHeader }) {
@@ -39,6 +40,9 @@ function NormalSideBar({ valueNavHeader }) {
 
     return (
         <nav className="sidebar">
+             <div className="logo-sidebar">
+                          <img src={Logo_Habitar_Sidebar} alt="logo" />
+             </div>
             <NavLink to="/home" className={getClassName}>Home</NavLink>
             
             <NavLink to="/integration" className={getClassName}>HubSpot</NavLink>
@@ -105,7 +109,7 @@ function HamburguerMenu ({navHeaderBody,setNavHeaderBody}){
              <div className="div-menu-resize">
 
                     <div className="div-link-redirection">
-                      <Link to="/home" onClick={deactiveNavHeaderBody}>Home</Link>
+                      <Link to="/home" onClick={deactiveNavHeaderBody}><span>Home</span></Link>
                     </div>
 
                     <div className="div-link-redirection">
@@ -121,7 +125,7 @@ function HamburguerMenu ({navHeaderBody,setNavHeaderBody}){
                     </div>
 
                     <div className="div-link-redirection">
-                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Configuración</Link>
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}><span>Configuración</span></Link>
                     </div>
               </div>
           )
@@ -167,13 +171,12 @@ export function ProtectedRoute() {
 
         {/* SIDEBAR (siempre visible a la izquierda) */}
         <NormalSideBar />
-
         {/* BLOQUE DERECHO (navbar + contenido) */}
         <div className="right-area">
 
               <header className="container-navbar">
                   <div className="nav-logo">
-                    <img src={logoHabitar} alt="logo" />
+                    <img src={logo_Habitar_Navbar} alt="logo" />
                   </div>
 
                     <IconMenuResize
@@ -182,20 +185,23 @@ export function ProtectedRoute() {
                       setNavHeaderBody={setNavHeaderBody}
                     />
 
+                    <HamburguerMenu
+                      setNavHeaderBody={setNavHeaderBody}
+                      navHeaderBody={navHeaderBody}
+                    />
+
                   <div className="nav-auth">
 
                       <div className="div-nav-profile">
                         <Link to="/my-profile">{username || authObj.username}</Link>
                       </div> 
 
-                      <div className="div-close-session">   
-                          <UserMenu 
-                            logout={logout}
-                            navigate={navigate}
-                            user={{ name: authObj.username || username }}
-                          />
-                      </div>
-
+                      <UserMenu 
+                        logout={logout}
+                        navigate={navigate}
+                        user={{ name: authObj.username || username }}
+                      />
+                      
                   </div>
               </header>
         
@@ -205,10 +211,7 @@ export function ProtectedRoute() {
                   {/* <NormalSideBar valueNavHeader={!isMobile} /> */}
                   {/* <NormalSideBar/> */}
                   
-                  <HamburguerMenu
-                    setNavHeaderBody={setNavHeaderBody}
-                    navHeaderBody={navHeaderBody}
-                  />
+ 
 
                   <main className="father-div-content-aplication">
                     {/* Pasamos los datos del usuario a todas las rutas hijas */}

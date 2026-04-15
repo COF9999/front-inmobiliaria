@@ -1,20 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 
-.user-menu {
-  position: relative;
-  display: inline-block;
-}
-
-/* botón perfil */
-.user-menu > button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* dropdown */
 .dropdown {
@@ -49,6 +35,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px;
   
