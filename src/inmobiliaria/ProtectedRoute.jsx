@@ -73,7 +73,7 @@ function HamburguerMenu ({navHeaderBody,setNavHeaderBody}){
              <div className="div-menu-resize">
 
                     <div className="div-link-redirection">
-                      <Link to="/home" onClick={deactiveNavHeaderBody}>Home</Link>
+                      <Link to="/home" onClick={deactiveNavHeaderBody}><span>Home</span></Link>
                     </div>
 
                     <div className="div-link-redirection">
@@ -89,7 +89,7 @@ function HamburguerMenu ({navHeaderBody,setNavHeaderBody}){
                     </div>
 
                     <div className="div-link-redirection">
-                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}>Configuración</Link>
+                      <Link to="/liquidation" onClick={deactiveNavHeaderBody}><span>Configuración</span></Link>
                     </div>
               </div>
           )
@@ -149,20 +149,23 @@ export function ProtectedRoute() {
                       setNavHeaderBody={setNavHeaderBody}
                     />
 
+                    <HamburguerMenu
+                      setNavHeaderBody={setNavHeaderBody}
+                      navHeaderBody={navHeaderBody}
+                    />
+
                   <div className="nav-auth">
 
                       <div className="div-nav-profile">
                         <Link to="/my-profile">{username || authObj.username}</Link>
                       </div> 
 
-                      <div className="div-close-session">   
-                          <UserMenu 
-                            logout={logout}
-                            navigate={navigate}
-                            user={{ name: authObj.username || username }}
-                          />
-                      </div>
-
+                      <UserMenu 
+                        logout={logout}
+                        navigate={navigate}
+                        user={{ name: authObj.username || username }}
+                      />
+                      
                   </div>
               </header>
         
@@ -172,10 +175,7 @@ export function ProtectedRoute() {
                   {/* <NormalSideBar valueNavHeader={!isMobile} /> */}
                   {/* <NormalSideBar/> */}
                   
-                  <HamburguerMenu
-                    setNavHeaderBody={setNavHeaderBody}
-                    navHeaderBody={navHeaderBody}
-                  />
+ 
 
                   <main className="father-div-content-aplication">
                     {/* Pasamos los datos del usuario a todas las rutas hijas */}

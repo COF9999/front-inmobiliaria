@@ -1,32 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 .nav-icon-hamburguer{
     display: none; 
     align-items: center;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 24px;
     color: black;
+    position: relative;
     
 }
 
 .div-menu-resize{
-    position:fixed;
+    /* position:fixed;
     background-color: rgb(240, 235, 235);
     display: block;
     z-index: 150;
     text-align: left;
     width: 30%;
     top: 45px;
-    left: 45px;
+    left: 45px; */
+
+    position: absolute;
+    top: 55px;
+    left: 10px;
+
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
 }
 
 .div-link-redirection{
-    padding: 10px;
+    padding: 8px;
     text-align: center;
-    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 3px;
+}
+
+.div-link-redirection:hover {
+  background: #f5f5f5;
 }
 
 .div-link-redirection a{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
     color: black;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 @media (max-width: 1200px) { 

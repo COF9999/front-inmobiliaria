@@ -65,7 +65,7 @@
     background-color:#fff;
     z-index: 1000;
     padding: 0 20px;
-    gap: 12px;
+    gap: 16px;
 }
 
 .nav-logo {
@@ -84,7 +84,8 @@
 .nav-auth {
     display: flex;
     align-items: center;
-    gap: 15px;  
+    gap: 15px; 
+    padding-right: 25px; 
 }
 
 .nav-auth a{
@@ -95,19 +96,18 @@
     font-size: 1rem;
 }
 
-.div-close-session{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 30px;
+/* botón perfil */
+.user-menu {
+  position: relative;
 }
 
-/* quitar bordes y fondo icono profile */
-.div-close-session button {
+.user-menu > button {
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .right-area{
