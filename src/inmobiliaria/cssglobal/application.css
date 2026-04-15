@@ -13,24 +13,20 @@
 }
 
 .container-application{
-    height: 100vh;
     background-color: white;
     display: flex;
-    /* flex-direction: column; */
+    min-height: 100vh;
 }
 
 /* sidebar */
 .sidebar{
-    /* z-index:100; */
+
     /* width: 10vw; */
-    /* min-height: 90vh; */
-    height: 100vh; 
     width: 170px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* min-height: 90vh; */
-    background-color: #3370b4;
+    background-color: rgba(51, 112, 180);
    
 }
 
@@ -38,7 +34,6 @@
     color:white;
     padding:15px 20px;
     font-family: 'Inter', sans-serif;
-    /* font-size: .88em; */
     font-size: 1rem;
     text-transform: none;
     font-weight:500;
@@ -47,55 +42,50 @@
 }
 
 .sweet-grey{
-    background-color: rgba(0, 22, 162, 0.973);
+    background-color: rgba(51, 80, 126);
     border-radius: 5px;
 }
 
 /* rigth area */
 .container-navbar{
 
+    min-height: 60px;
+    max-height: 60px;
+    height: 60px;
+    
     width: 100%;
     height: 60px;
     border-radius: 0px 2px 0px 2px;
     display: flex;
     align-items: center; 
-    justify-content:space-between;
+    justify-content:flex-end;
     position: sticky;
     top: 0;
     border-bottom: 2px solid rgb(202, 210, 42); 
     background-color:#fff;
     z-index: 1000;
     padding: 0 20px;
+    gap: 16px;
 }
 
 .nav-logo {
-    display: flex;
-    justify-content: center;
+    display: none;
     align-items: center;
-    width: 15%;
-    padding: 20px;
-    /* flex: 0 0 auto; */
    
 }
 
 .nav-logo img{
-    width: 150px;
+    width: 130px;
     height: auto;
     object-fit: contain;
-    background-color: transparent;
-    
-
+    background-color: transparent; 
 }
 
 .nav-auth {
     display: flex;
     align-items: center;
-    margin-right: 5px; 
-    /* flex: 1; */
-    /* justify-content: flex-end; */
-    gap: 15px;
-    /* flex: 0 0 auto; */
-    
+    gap: 15px; 
+    padding-right: 25px; 
 }
 
 .nav-auth a{
@@ -106,35 +96,54 @@
     font-size: 1rem;
 }
 
-.div-close-session{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 30px;
+/* botón perfil */
+.user-menu {
+  position: relative;
 }
 
-/* quitar bordes y fondo icono profile */
-.div-close-session button {
+.user-menu > button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.container-content-app{
+.right-area{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* .container-content-app{
     display: flex;
     flex: 1;
-    
-}
+    width: 100%;
+} */
 .father-div-content-aplication{
-  width: 90vw;
+  width: 100%;
   min-height: 90vh; 
   padding: 20px;
   box-sizing: border-box; 
   position: relative; 
   transition: .3s ease;
+  
+}
+
+.logo-sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 10px;
+}
+
+.logo-sidebar img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
 }
 
 
@@ -144,24 +153,22 @@
         display: none;
     }
 
+    .container-navbar{
+        justify-content: space-between;
+    }
+
     .father-div-content-aplication{
         margin-left:0;
     }
 
     .nav-logo {
-    
-        width: 20%; 
-        justify-content: center; 
+        display: flex; 
         padding: 2px; 
     }
-    .nav-logo img {
-        width: 100px; 
-        height: 45px;
-    }
 
-    /* .div-nav-profile{
+    .div-nav-profile{
         display: none;
-    } */
+    }
          
 }
 
