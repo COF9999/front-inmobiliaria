@@ -6,7 +6,35 @@ import { MoreHorizontal} from 'lucide-react';
 import "../../css/components.css"
 
 
-export const ProfessionalCard = ({ dataBlock1, dataBlock2, actions }) => {
+
+export const CardDetail=({item,normalContentCard,listActions})=>{
+  const isSuccess = item.isRealizedPay
+  return(  
+       <div class="card-detail"  style={{ borderBottom: `4px solid ${isSuccess ? '#22c55e' : '#ef4444'}` }}>
+          <div class="card-detail-grid">
+                     {normalContentCard ? normalContentCard : null}
+                     {listActions.length > 0 ? (
+                    <div key={`${item.id}-action-user`}>
+                      {listActions.map((action, index) => (
+                          <div class="card-detail-actions">
+                            <ButtonAction
+                                className="btn-action"
+                                SvgComponent={action.svg}
+                                action={() => action.event(item,action)}
+                            />
+                          </div>
+                      )
+                      )}                      
+                    </div>
+
+                    ) : null}
+                </div>
+        </div>
+      )
+}  
+    
+
+export const ProfessionalCard = ({ item,dataBlock1, dataBlock2, actions }) => {
   return (
     <div className="w-[80%] h-[200px] bg-white rounded-2xl shadow-md border border-slate-200 flex overflow-hidden">
         {/* COLUMNA 1: Estructura vertical (H2 y H3) */}
@@ -42,7 +70,7 @@ export const ProfessionalCard = ({ dataBlock1, dataBlock2, actions }) => {
           {actions.map((action, index) => (
             <button
               key={index}
-              onClick={action.onClick}
+              onClick={()=> action.event(item,action)}
               className="p-3 rounded-xl bg-slate-800 text-slate-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 group"
               title={action.label}
             >

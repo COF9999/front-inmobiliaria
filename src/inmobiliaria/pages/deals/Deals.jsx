@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { findDealsLiquidateByStatus } from './services/dealsService';
 import { ProfessionalCard } from '../../components/pureComponents/component';
@@ -6,24 +6,29 @@ import { Settings, Trash2, Edit, Share2, Eye } from 'lucide-react';
 import "../../css/deals.css"
 
 
-const actionList = [
-        { icon: <Eye size={20} />, label: "Ver", onClick: () => console.log("View") },
-];
-
 export function DealsHome(){
 
     const navigate = useNavigate();
     const [deals,setDeals] = useState([])
 
-    const navigateToDetail = (typeFunnel,item) => {
+    const navigateToDetail = useCallback((item) => {
         // 1. Guardamos en sessionStorage como respaldo
         sessionStorage.setItem('currentDealId', item.id);
-        if(typeFunnel){
-            navigate('funnel-sale/detail',{ state: { dealId: item.id } })
+        console.log("ENTRO");
+        
+        if(item.dealRegisterDto.pipelineType=="Funnel Sale"){
+            navigate(`funnel-sale/detail/${item.dealRegisterDto.dealUserId}`,{ state: { item: item.dealRegisterDto } })
         }else{
-            navigate('funnel-rent/detail',{ state: { dealId: item.id } })
+            navigate(`funnel-rent/detail/${item.dealRegisterDto.dealUserId}`,{ state: { item: item.dealRegisterDto } })
         }
-    }
+    },[])
+
+    const actionList = useMemo(()=>[
+        {   icon: <Eye size={20} />, 
+            label: "Ver", 
+            event: (deal,self) => navigateToDetail(deal) 
+        },
+    ],[]);
 
     useEffect(()=>{
         const applyConsult = async()=>{
@@ -42,7 +47,7 @@ export function DealsHome(){
             <div className='deals-main-container'>
               {
                   deals.length>0
-                  ? <RecreateCard list={deals}/>
+                  ? <ManipulatateCreationCard list={deals} actionList={actionList}/>
                   :""
                } 
             </div>
@@ -51,10 +56,12 @@ export function DealsHome(){
 }
 
 
-function RecreateCard({list}){
+function ManipulatateCreationCard({list,actionList}){
    return (
         <>
             {list.map((dealLiquidate, index) => {
+                
+                
                 const block1 = {
                     title: dealLiquidate.dealRegisterDto.pipelineType,
                     subtitle: dealLiquidate.dealRegisterDto.nameUser
@@ -66,17 +73,29 @@ function RecreateCard({list}){
                 ];
 
                 return (
-                    <ProfessionalCard 
-                        key={index} 
-                        dataBlock1={block1} 
-                        dataBlock2={ { items: block2 }} 
-                        actions={actionList} 
+                    <CreateCardDealLiquidate
+                        key={index}
+                        item={dealLiquidate}
+                        block1={block1} 
+                        block2={ { items: block2 }} 
+                        actionList={actionList} 
                     />
                 );
             })}
         </>
     );
-     
+}
+
+export function CreateCardDealLiquidate({key,item,block1,block2,actionList}){
+    return(
+        <ProfessionalCard
+                        key={key}
+                        item={item}
+                        dataBlock1={block1} 
+                        dataBlock2={block2} 
+                        actions={actionList} 
+        />
+    )
 }
 
 {/*  */}

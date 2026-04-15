@@ -239,3 +239,92 @@
 }
 
 /**/
+
+/* cardDetail */
+
+:root {
+  --primary-color: #4f46e5;
+  --bg-secondary: #f8fafc;
+  --text-dark: #0f172a;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
+}
+
+.card-detail {
+  width: 60vw;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0 40px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  margin: 20px auto;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.card-detail-grid {
+  display: grid;
+  /* 4 columnas de contenido + 1 columna de acciones (auto) */
+  grid-template-columns: repeat(4, 1fr) auto; 
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.card-detail-item {
+  display: flex;
+  flex-direction: column; /* Alinea etiqueta arriba y valor abajo */
+  margin-bottom: 12px;    /* Espacio entre bloques de la lista */
+}
+
+.card-detail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.card-detail-value {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Columna de Acciones */
+.card-detail-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-left: 20px;
+  border-left: 1px solid var(--border-color); /* Separador visual para las acciones */
+}
+
+/* Estilo de Botones */
+.btn-action {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-action {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-action :hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+
+/* Resaltado de datos */
+.status-active { color: #059669; }
+.amount-highlight { color: var(--primary-color); }
+
+
+
+/*  */

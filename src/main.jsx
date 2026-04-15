@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       }, 
 
       {
-        path: '/liquidation',
+        path: '/integration',
         element: <RootIntegration/>,
         children:[
           {index:true, element: <Integration />},
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
             path: 'funnel-sale', 
             element: <RootFunnelSale />,
             children: [{ index: true, element: <FunnelSale /> },
-              { path: 'detail', element: <DetailFunnelSales /> } 
+              { path: 'detail/:id', element: <DetailFunnelSales /> } 
             ]
           },
           { 
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
           element: <RootFunnelRent />, 
           children: [
             { index: true, element: <FunnelRent /> },
-            { path: 'detail', element: <DetailFunnelRent /> } 
+            { path: 'detail/:id', element: <DetailFunnelRent /> } 
           ] 
           }
         ]

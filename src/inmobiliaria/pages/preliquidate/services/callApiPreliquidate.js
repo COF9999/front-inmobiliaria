@@ -3,9 +3,16 @@ import { getConsult, postConsult } from "../../../consults/axios"
 export const actionDeal= (deal)=>{
   const executeConsult = async (deal)=>{
 
+      let typeMethod = "";
+      if(deal.pipelineType==="Funnel Sales"){
+          typeMethod = "LIQUIDATE" 
+      }else{
+        typeMethod = "PLAN"
+      }
+
       const requestBody = {
         dealId: deal.dealUserId,
-        typeMethod:"PLAN",
+        typeMethod:typeMethod,
         hubspotEnum:deal.pipelineType.replaceAll(" ", "").toUpperCase(),
         statesObjects:'OPEN'
       }

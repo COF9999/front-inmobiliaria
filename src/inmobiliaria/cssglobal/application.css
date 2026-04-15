@@ -137,6 +137,18 @@
   transition: .3s ease;
 }
 
+/* 
+Habueguer Icon
+
+
+*/
+
+.nav-icon-hamburguer{
+    flex: 1;
+    justify-content: flex-start;
+}
+
+/* */
 
 @media (max-width:1200px){
 
@@ -157,6 +169,10 @@
     .nav-logo img {
         width: 100px; 
         height: 45px;
+    }
+
+    .right-area{
+        width: 100vw;
     }
 
     /* .div-nav-profile{
