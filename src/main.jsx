@@ -7,16 +7,25 @@ import { Home } from './inmobiliaria/pages/home/Home.jsx';
 import { ProtectedRoute } from './inmobiliaria/ProtectedRoute.jsx';
 import { AuthProvider } from './inmobiliaria/AuthProvider.jsx';
 import { RootHome } from './inmobiliaria/pages/home/RootHome.jsx';
-import { RootLiquidation } from './inmobiliaria/pages/liquidation/RootLiquidation.jsx';
-import { Liquidation } from './inmobiliaria/pages/liquidation/Liquidation.jsx';
-import { RootProcessDeal } from './inmobiliaria/pages/processDeal/RootProcessDeal.jsx';
-import { ProcessDeal } from './inmobiliaria/pages/processDeal/ProcessDeal.jsx';
+import { RootIntegration } from './inmobiliaria/pages/liquidation/RootIntegration.jsx';
+import { Integration } from './inmobiliaria/pages/liquidation/Integration.jsx';
+import { RootPreliquidateDeal } from './inmobiliaria/pages/preliquidate/RootPreliquidateDeal.jsx';
+import { Preliquidate } from './inmobiliaria/pages/preliquidate/Preliquidate.jsx';
 import { RootUser } from './inmobiliaria/pages/user/RootUser.jsx';
 import { User } from './inmobiliaria/pages/user/User.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RootSettings } from './inmobiliaria/pages/settings/rootSettings.jsx';
 import { Settings } from './inmobiliaria/pages/settings/settings.jsx';
+import { RootFunnelRent } from './inmobiliaria/pages/deals/funnelRent/FunnelRentRoot.jsx';
+import { FunnelRent } from './inmobiliaria/pages/deals/funnelRent/FunnelRent.jsx';
+import { RootFunnelSale } from './inmobiliaria/pages/deals/funnelsales/FunnelSaleRoot.jsx';
+import { FunnelSale } from './inmobiliaria/pages/deals/funnelsales/FunnelSale.jsx';
+import { RootDeals } from './inmobiliaria/pages/deals/RootDeals.jsx';
+import { DealsHome } from './inmobiliaria/pages/deals/Deals.jsx';
+import { DetailFunnelSales } from './inmobiliaria/pages/deals/funnelsales/DetailFunnelSales.jsx';
+import { DetailFunnelRent } from './inmobiliaria/pages/deals/funnelRent/DetailFunnelRent.jsx';
 import './app.css'
+
 
 const queryClient = new QueryClient();
 
@@ -45,17 +54,43 @@ const router = createBrowserRouter([
 
       {
         path: '/liquidation',
-        element: <RootLiquidation />,
+        element: <RootIntegration/>,
         children:[
-          {index:true, element: <Liquidation />},
+          {index:true, element: <Integration />},
         ]
       },
 
       {
-        path:'/process-deal',
-        element:<RootProcessDeal/>,
+        path:'/preliquidate',
+        element:<RootPreliquidateDeal/>,
         children:[
-          {index:true,element:<ProcessDeal/>}
+          {index:true,element:<Preliquidate/>}
+        ]
+      },
+      {
+        path: '/deals',
+        element: <RootDeals />,
+        children: [
+          {
+            
+            index: true, 
+            element: <DealsHome/> 
+          },
+          {
+            path: 'funnel-sale', 
+            element: <RootFunnelSale />,
+            children: [{ index: true, element: <FunnelSale /> },
+              { path: 'detail', element: <DetailFunnelSales /> } 
+            ]
+          },
+          { 
+          path: 'funnel-rent', 
+          element: <RootFunnelRent />, 
+          children: [
+            { index: true, element: <FunnelRent /> },
+            { path: 'detail', element: <DetailFunnelRent /> } 
+          ] 
+          }
         ]
       },
       {
