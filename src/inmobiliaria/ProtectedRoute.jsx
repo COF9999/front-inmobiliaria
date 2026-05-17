@@ -10,7 +10,7 @@ import "./cssglobal/application.css"
 import "./cssglobal/resize.css"
 
 
-import logo_Habitar_Navbar from "../assets/LogohabitarNavbar.png"
+import logo_Habitar_Navbar from "../assets/LogoHabitarNavbar.png"
 import Logo_Habitar_Sidebar from "../assets/LogoHabitarSidebar.png"
 
 
